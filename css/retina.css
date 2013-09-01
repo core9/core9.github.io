@@ -1,0 +1,122 @@
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   -moz-min-device-pixel-ratio: 2),
+only screen and (     -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx) {
+    .logo { background-image: url('../img/logo@2x.png'); }
+    .up { background-image: url('../img/up@2x.png'); }
+    .down { background-image: url('../img/down@2x.png'); }
+    #circle .circle.seconds { background-image: url('../img/circle-seconds@2x.png'); }
+    #circle .circle.minutes { background-image: url('../img/circle-minutes@2x.png'); }
+    #circle .circle.hours { background-image: url('../img/circle-hours@2x.png'); }
+    #circle .circle.days { background-image: url('../img/circle-days@2x.png'); }
+    #circle .circle.days .left .normal { background-image: url('../img/circle-days-left@2x.png'); }
+    #circle .circle.days .right .normal { background-image: url('../img/circle-days-right@2x.png'); }
+    #circle .circle.hours .left .normal { background-image: url('../img/circle-hours-left@2x.png'); }
+    #circle .circle.hours .right .normal { background-image: url('../img/circle-hours-right@2x.png'); }
+    #circle .circle.minutes .left .normal { background-image: url('../img/circle-minutes-left@2x.png'); }
+    #circle .circle.minutes .right .normal { background-image: url('../img/circle-minutes-right@2x.png'); }
+    #circle .circle.seconds .left .normal { background-image: url('../img/circle-seconds-left@2x.png'); }
+    #circle .circle.seconds .right .normal { background-image: url('../img/circle-seconds-right@2x.png'); }
+    #circle .circle.days .left .small { background-image: url('../img/circle-days-left-small@2x.png'); }
+    #circle .circle.days .right .small { background-image: url('../img/circle-days-right-small@2x.png'); }
+    #circle .circle.hours .left .small { background-image: url('../img/circle-hours-left-small@2x.png'); }
+    #circle .circle.hours .right .small { background-image: url('../img/circle-hours-right-small@2x.png'); }
+    #circle .circle.minutes .left .small { background-image: url('../img/circle-minutes-left-small@2x.png'); }
+    #circle .circle.minutes .right .small { background-image: url('../img/circle-minutes-right-small@2x.png'); }
+    #circle .circle.seconds .left .small { background-image: url('../img/circle-seconds-left-small@2x.png'); }
+    #circle .circle.seconds .right .small { background-image: url('../img/circle-seconds-right-small@2x.png'); }
+    #circle .circle.days .val { background-image: url('../img/number-days@2x.png'); }
+    #circle .circle.hours .val { background-image: url('../img/number-hours@2x.png'); }
+    #circle .circle.minutes .val { background-image: url('../img/number-minutes@2x.png'); }
+    #circle .circle.seconds .val { background-image: url('../img/number-seconds@2x.png'); }
+    #circle .val .number { background-image: url('../img/number-dim@2x.png'); }
+    #circle .val .number.days-0 > img { background-image: url('../img/number-days-0@2x.png'); }
+    #circle .val .number.days-1 > img { background-image: url('../img/number-days-1@2x.png'); }
+    #circle .val .number.days-2 > img { background-image: url('../img/number-days-2@2x.png'); }
+    #circle .val .number.days-3 > img { background-image: url('../img/number-days-3@2x.png'); }
+    #circle .val .number.days-4 > img { background-image: url('../img/number-days-4@2x.png'); }
+    #circle .val .number.days-5 > img { background-image: url('../img/number-days-5@2x.png'); }
+    #circle .val .number.days-6 > img { background-image: url('../img/number-days-6@2x.png'); }
+    #circle .val .number.days-7 > img { background-image: url('../img/number-days-7@2x.png'); }
+    #circle .val .number.days-8 > img { background-image: url('../img/number-days-8@2x.png'); }
+    #circle .val .number.days-9 > img { background-image: url('../img/number-days-9@2x.png'); }
+    #circle .val .number.hours-0 > img { background-image: url('../img/number-hours-0@2x.png'); }
+    #circle .val .number.hours-1 > img { background-image: url('../img/number-hours-1@2x.png'); }
+    #circle .val .number.hours-2 > img { background-image: url('../img/number-hours-2@2x.png'); }
+    #circle .val .number.hours-3 > img { background-image: url('../img/number-hours-3@2x.png'); }
+    #circle .val .number.hours-4 > img { background-image: url('../img/number-hours-4@2x.png'); }
+    #circle .val .number.hours-5 > img { background-image: url('../img/number-hours-5@2x.png'); }
+    #circle .val .number.hours-6 > img { background-image: url('../img/number-hours-6@2x.png'); }
+    #circle .val .number.hours-7 > img { background-image: url('../img/number-hours-7@2x.png'); }
+    #circle .val .number.hours-8 > img { background-image: url('../img/number-hours-8@2x.png'); }
+    #circle .val .number.hours-9 > img { background-image: url('../img/number-hours-9@2x.png'); }
+    #circle .val .number.minutes-0 > img { background-image: url('../img/number-minutes-0@2x.png'); }
+    #circle .val .number.minutes-1 > img { background-image: url('../img/number-minutes-1@2x.png'); }
+    #circle .val .number.minutes-2 > img { background-image: url('../img/number-minutes-2@2x.png'); }
+    #circle .val .number.minutes-3 > img { background-image: url('../img/number-minutes-3@2x.png'); }
+    #circle .val .number.minutes-4 > img { background-image: url('../img/number-minutes-4@2x.png'); }
+    #circle .val .number.minutes-5 > img { background-image: url('../img/number-minutes-5@2x.png'); }
+    #circle .val .number.minutes-6 > img { background-image: url('../img/number-minutes-6@2x.png'); }
+    #circle .val .number.minutes-7 > img { background-image: url('../img/number-minutes-7@2x.png'); }
+    #circle .val .number.minutes-8 > img { background-image: url('../img/number-minutes-8@2x.png'); }
+    #circle .val .number.minutes-9 > img { background-image: url('../img/number-minutes-9@2x.png'); }
+    #circle .val .number.seconds-0 > img { background-image: url('../img/number-seconds-0@2x.png'); }
+    #circle .val .number.seconds-1 > img { background-image: url('../img/number-seconds-1@2x.png'); }
+    #circle .val .number.seconds-2 > img { background-image: url('../img/number-seconds-2@2x.png'); }
+    #circle .val .number.seconds-3 > img { background-image: url('../img/number-seconds-3@2x.png'); }
+    #circle .val .number.seconds-4 > img { background-image: url('../img/number-seconds-4@2x.png'); }
+    #circle .val .number.seconds-5 > img { background-image: url('../img/number-seconds-5@2x.png'); }
+    #circle .val .number.seconds-6 > img { background-image: url('../img/number-seconds-6@2x.png'); }
+    #circle .val .number.seconds-7 > img { background-image: url('../img/number-seconds-7@2x.png'); }
+    #circle .val .number.seconds-8 > img { background-image: url('../img/number-seconds-8@2x.png'); }
+    #circle .val .number.seconds-9 > img { background-image: url('../img/number-seconds-9@2x.png'); }
+    #subscribe .email { background-image: url('../img/subscribe-email@2x.png'); }
+    #subscribe .submit { background-image: url('../img/subscribe-send@2x.png'); }
+    .social { background-image: url('../img/social@2x.png'); }
+    .team > li > .bounds { background-image: url('../img/member@2x.png'); }
+    .team > li > .border { background-image: url('../img/member-border@2x.png'); }
+    .team > li > .pick { background-image: url('../img/member-pick@2x.png'); }
+    .services > li > .balloon { background-image: url('../img/service@2x.png'); }
+}
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   -moz-min-device-pixel-ratio: 2),
+only screen and (     -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx),
+only screen and (max-width: 544px) {
+    #circle { background-image: url('../img/circle-small@2x.png'); }
+    #circle .circle.seconds { background-image: url('../img/circle-seconds-small@2x.png'); }
+    #circle .circle.minutes { background-image: url('../img/circle-minutes-small@2x.png'); }
+    #circle .circle.hours { background-image: url('../img/circle-hours-small@2x.png'); }
+    #circle .circle.days { background-image: url('../img/circle-days-small@2x.png'); }
+    #subscribe .email { background-image: url('../img/subscribe-email-small@2x.png'); }
+    #subscribe .submit { background-image: url('../img/subscribe-send-small@2x.png'); }
+}
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   -moz-min-device-pixel-ratio: 2),
+only screen and (     -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx),
+only screen and (max-width: 459px) {
+    #subscribe .email { background-image: url('../img/subscribe-email-tiny@2x.png') !important; }
+}
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   -moz-min-device-pixel-ratio: 2),
+only screen and (     -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx),
+only screen and (max-width: 378px) {
+    .logo { width: 212px; background-image: url('../img/logo-small@2x.png'); }
+}
