@@ -13,6 +13,7 @@
 <link href="./css/style.css" rel="stylesheet">
 <link href="./css/style.less" rel="stylesheet/less" type="text/css" />
 <link href="./css/retina.css" rel="stylesheet">
+<link href="./css/pygments.css" rel="stylesheet">
 
 <script src="./js/less.min.js"></script>
 
@@ -37,20 +38,52 @@
 	<div class="margin-group">
 
 		<div
-			style="min-height: 0; padding-top: 49px; text-align: center; padding-bottom: 17px;">
+			style=" min-height: 0; padding-top: 49px;   padding-bottom: 17px;">
 			<!-- <a href="./" class="logo"><img src="./img/spacer.gif" alt="" /></a> -->
 			<span
-				style="display: block; color: #fff; font-family: 'Michroma', sans-serif; font-size: 35px; font-weight: 900; margin-right: 355px;">Core9</span>
+				style="display: block;  padding-left: 20px; margin-left: auto; margin-right: auto;width: 800px; color: #fff; font-family: 'Michroma', sans-serif; font-size: 35px; font-weight: 900; ">Core9</span>
 			<span></span> <span
-				style="display: block; color: #fff; font-family: 'Michroma', sans-serif; font-size: 25px; font-weight: 900; margin-right: 0px; margin-bottom: -45px;">Sharing
+				style="display: block; padding-left: 120px; margin-left:auto; margin-right: auto;width: 800px; color: #fff; font-family: 'Michroma', sans-serif; font-size: 25px; font-weight: 900;  margin-bottom: -45px;">Sharing
 				quality code.</span>
 		</div>
 
 		<div class="site-line"></div>
-		
-		
+
+		<div class="content"
+			style="width: 800px; margin-left: auto; margin-right: auto;margin-bottom: 30px;">
+
+			<article>
+				<h1>Pagination</h1>
+				<p>With many websites—especially blogs—it’s very common to break
+					the main listing of posts up into smaller lists and display them
+					over multiple pages. Jekyll has pagination built-in, so you can
+					automatically generate the appropriate files and folders you need
+					for paginated listings.</p>
+				<div class="note info">
+					<h5>Pagination only works within HTML files</h5>
+					<p>Pagination does not work with Markdown or Textile files in
+						your Jekyll site. It will only work when used within HTML files.
+						Since you’ll likely be using this for the list of Posts, this
+						shouldn’t be an issue.</p>
+				</div>
+				<h2 id="enable_pagination">Enable pagination</h2>
+
+				<p>
+					To enable pagination for your blog, add a line to the
+					<code>_config.yml</code>
+					file that specifies how many items should be displayed per page:
+				</p>
 		<script src="https://gist.github.com/jessec/6412587.js"></script>
-		
+				<p>The number should be the maximum number of Posts you’d like
+					to be displayed per- page in the generated site.</p>
+
+
+
+			</article>
+		</div>
+
+
+
 
 		<ul class="socials margin-element">
 			<li><a href="javascript:;" class="social twitter"><span><img
