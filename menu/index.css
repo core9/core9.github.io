@@ -12,7 +12,7 @@ section { display: block; padding: 0px; margin: 0px auto; max-width: 1200px; min
 article { display: block; padding: 0px; margin: 0px; }
 .menu { display: block; padding: 0px; margin: 0px; height: 42px; position: relative; -moz-user-select: none; }
 .menu img { position: absolute; left: 5px; top: 14px; z-index: 100; display: none; }
-.menu ul { padding: 0px; margin: 0px; border: 1px solid rgb(170, 170, 170); background: none repeat scroll 0% 0% #555; }
+.menu ul { padding: 0px; margin: 0px; border: 1px solid rgb(170, 170, 170); border-left:0px; border-right:0px;background: none repeat scroll 0% 0% #555; }
 .menu ul li { display: inline-block; position: relative; background: none repeat scroll 0% 0% #555; }
 .menu ul li {  }
 .menu ul li a { display: block; font: 16px/40px 'Roboto Condensed',arial,sans-serif; color: rgb(68, 68, 68); text-decoration: none; padding: 0px 25px; }
