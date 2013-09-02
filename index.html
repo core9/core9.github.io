@@ -36,32 +36,27 @@
 
 	<div class="margin-group">
 
-		<div style="min-height: 0; padding-top: 49px; text-align: center;padding-bottom: 17px;">
+		<div
+			style="min-height: 0; padding-top: 49px; text-align: center; padding-bottom: 17px;">
 			<!-- <a href="./" class="logo"><img src="./img/spacer.gif" alt="" /></a> -->
 			<span
-				style="display: block; color: #fff; font-family: 'Michroma', sans-serif; font-size: 35px; font-weight: 900; margin-right: 400px;">Core9</span>
+				style="display: block; color: #fff; font-family: 'Michroma', sans-serif; font-size: 35px; font-weight: 900; margin-right: 355px;">Core9</span>
 			<span></span> <span
 				style="display: block; color: #fff; font-family: 'Michroma', sans-serif; font-size: 25px; font-weight: 900; margin-right: 0px; margin-bottom: -45px;">Sharing
 				quality code.</span>
 		</div>
 
-		<div class="line">
-			<div class="title" style="width: 800px; background: none;">
-				<ul class="socials margin-element" style="padding-top: 58px;">
-					<li><a href="javascript:;" class="social twitter"><span><img
-								src="./img/social/twitter.png" alt="" /></span></a></li>
-					<li><a href="javascript:;" class="social linkedin"><span><img
-								src="./img/social/linkedin.png" alt="" /></span></a></li>
-					<li><a href="javascript:;" class="social facebook"><span><img
-								src="./img/social/facebook.png" alt="" /></span></a></li>
-					<li><a href="javascript:;" class="social google-plus"><span><img
-								src="./img/social/google-plus.png" alt="" /></span></a></li>
-					<li><a href="javascript:;" class="social vimeo"><span><img
-								src="./img/social/vimeo.png" alt="" /></span></a></li>
-					<li><a href="javascript:;" class="social stumbleupon"><span><img
-								src="./img/social/stumbleupon.png" alt="" /></span></a></li>
-				</ul>
-			</div>
+		<div class="line"></div>
+		<div class="title"
+			style="width: 800px; background: none; margin-left: auto; margin-right: auto;margin-top: -25px;">
+            <form id="subscribe" class="margin-element" action="./subscribe.php" method="post" target="subscribe" onsubmit="setTimeout(function() { $('#subscribe [name=email]').val('Thank you for subscribing :)'); }, 100);">
+                <div class="email">
+                    <input type="text" name="email" value="E-mail" onfocus="if(this.value=='E-mail')this.value='';$(this).parent().addClass('over');" onblur="if(this.value=='')this.value='E-mail';$(this).parent().removeClass('over');" />
+                </div>
+                <div class="submit">
+                    <input type="submit" onmouseover="$(this).parent().addClass('over');" onmouseout="$(this).parent().removeClass('over');" value="Send" />
+                </div>
+            </form>
 		</div>
 		<div class="container">
 			<div id="map">
