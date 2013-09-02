@@ -9,7 +9,7 @@
 /* ::::: http://www.cssplay.co.uk/menus/responsive-single/responsive-single.css ::::: */
 
 section { display: block; padding: 0px; margin: 0px auto; max-width: 1200px; min-width: 320px; }
-article { display: block; padding: 0px; margin: 0px; }
+article { display: block; padding: 40px; margin: 0px; }
 .menu { display: block; padding: 0px; margin: 0px; height: 42px; position: relative; -moz-user-select: none; }
 .menu img { position: absolute; left: 5px; top: 14px; z-index: 100; display: none; }
 .menu ul { padding: 0px; margin: 0px; border: 1px solid rgb(170, 170, 170); border-left:0px; border-right:0px;background: none repeat scroll 0% 0% #555; }
@@ -22,9 +22,9 @@ article { display: block; padding: 0px; margin: 0px; }
 .menu.center { text-align: center; }
 .menu.right { text-align: right; }
 p { font: 17px/20px 'times new roman',serif; color: rgb(102, 102, 102); }
-h1 { font: 30px/40px 'times new roman',serif; color: rgb(68, 68, 68); }
+/* h1 { font: 30px/40px 'times new roman',serif; color: rgb(68, 68, 68); }
 h3 { font: 20px/30px 'times new roman',serif; color: rgb(102, 102, 102); }
-h4 { font: 18px/20px 'times new roman',serif; color: rgb(68, 68, 68); }
+h4 { font: 18px/20px 'times new roman',serif; color: rgb(68, 68, 68); } */
 @media only screen and (max-width: 880px) {
 	.menu { width: 200px; }
 	.menu.center { margin: 0px auto; text-align: left; }
