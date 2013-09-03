@@ -948,3 +948,9 @@ code.option, code.flag, code.filter, code.output {
     padding: 0 10px;
   }
 }
+
+
+.line, .line-numbers {
+	text-shadow:none;
+}
+
