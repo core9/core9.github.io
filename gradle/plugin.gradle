@@ -1,0 +1,176 @@
+apply plugin: 'java'
+apply plugin: "maven"
+
+//TODO move JSPF to core, see ticket #28
+project.ext {
+	v = [
+		jspf: '1.0.0',
+	]
+	jspf = files("lib/jspf.core-1.0.0.jar")
+}
+
+/**
+ * Source sets
+ * impl and api sources
+ */
+sourceSets {
+	api
+	impl
+}
+
+sourceSets.api.output.resourcesDir = sourceSets.api.output.classesDir
+sourceSets.impl.output.resourcesDir = sourceSets.impl.output.classesDir
+sourceSets.test.output.resourcesDir = sourceSets.test.output.classesDir
+
+task createDirs() {
+	file("lib").mkdirs()
+	sourceSets*.java.srcDirs*.each { if(!it.toString().contains("src/main")) { it.mkdirs() } }
+	sourceSets*.resources.srcDirs*.each { if(!it.toString().contains("src/main")) { it.mkdirs() } }
+}
+
+sourceSets.all { set ->
+	def jarTask = task("${set.name}Jar", type: Jar) {
+		baseName = baseName + "-$set.name"
+		from set.output
+	}
+	artifacts { archives jarTask }
+}
+
+jar {
+	from sourceSets.api.output
+	from sourceSets.impl.output
+}
+
+configurations {
+	apiCompile.extendsFrom compile
+	implCompile.extendsFrom compile
+}
+
+/**
+ * Documentation
+ */
+
+task implJavadocs(type: Javadoc) {
+	source = sourceSets.impl.allJava
+	classpath = sourceSets.impl.runtimeClasspath
+	destinationDir = reporting.file("impl-docs")
+}
+
+task apiJavadocs(type: Javadoc) {
+	source = sourceSets.api.allJava
+	classpath = sourceSets.api.runtimeClasspath
+	destinationDir = reporting.file("api-docs")
+}
+
+/**
+ * Maven and dependency resolving
+ */
+
+dependencies {
+	compile jspf
+	compile 'io.core9:core-api:1.0-SNAPSHOT'
+	
+	implCompile sourceSets.api.output
+	
+	testCompile 'junit:junit:4.11'
+	testCompile sourceSets.api.output
+	testCompile sourceSets.impl.output
+		
+	runtime configurations.apiRuntime
+	runtime configurations.implRuntime
+	
+}
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+	
+	maven {
+		credentials {
+			//TODO
+			username ''
+			password ''
+		}
+		url 'https://bitbucket.org/core9/maven-repository/raw/master'
+	}
+}
+
+install {
+	repositories {
+		mavenInstaller {
+			addFilter("main") { artifact, file -> artifact.name == project.name }
+			["api", "impl"].each { type ->
+				addFilter(type) { artifact, file -> artifact.name.endsWith("-$type") }
+
+				// We now have to map our configurations to the correct maven scope for each pom
+				["compile", "runtime"].each { scope ->
+					configuration = configurations[type + scope.capitalize()]
+					["main", type].each { pomName ->
+						pom(pomName).scopeMappings.addMapping 1, configuration, scope
+					}
+				}
+			}
+		}
+	}
+}
+
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+
+			repository(url: "http://divvers.com/nexus/content/repositories/io.core9") {
+				//TODO authentication(userName: "", password: "")
+			}
+
+			snapshotRepository(url: 'http://divvers.com/nexus/content/repositories/core') {
+				//TODO authentication(userName: "", password: "")
+			}
+
+
+			addFilter("main") { artifact, file -> artifact.name == project.name }
+			["api", "impl"].each { type ->
+				addFilter(type) { artifact, file -> artifact.name.endsWith("-$type") }
+
+				// We now have to map our configurations to the correct maven scope for each pom
+				["compile", "runtime"].each { scope ->
+					configuration = configurations[type + scope.capitalize()]
+					["main", type].each { pomName ->
+						pom(pomName).scopeMappings.addMapping 1, configuration, scope
+					}
+				}
+			}
+
+		}
+	}
+}
+
+class Simple {
+	def redirectFollowingDownload( String url, String filename ) {
+		while( url ) {
+			new URL( url ).openConnection().with { conn ->
+				conn.instanceFollowRedirects = false
+				url = conn.getHeaderField( "Location" )
+				if( !url ) {
+					new File( filename ).withOutputStream { out ->
+						conn.inputStream.with { inp ->
+							out << inp
+							inp.close()
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+task downloadJar(){
+	jspf.each {
+		println it
+		println project.ext.jspf
+		url = "https://bitbucket.org/core9/maven-repository/raw/master/io/core9/jspf/core-${project.ext.v.jspf}/jspf.core-${project.ext.v.jspf}.jar"
+		println url
+		def s = new Simple()
+		s.redirectFollowingDownload(url, it.toString());
+	}
+}
