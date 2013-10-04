@@ -69,21 +69,36 @@ task apiJavadocs(type: Javadoc) {
 dependencies {
 	compile jspf
 	compile 'io.core9:core-api:1.0-SNAPSHOT'
-	
+
 	implCompile sourceSets.api.output
-	
+
 	testCompile 'junit:junit:4.11'
 	testCompile sourceSets.api.output
 	testCompile sourceSets.impl.output
-		
+
 	runtime configurations.apiRuntime
 	runtime configurations.implRuntime
-	
+
 }
 
 repositories {
 	mavenLocal()
 	mavenCentral()
+
+	maven {
+		credentials {
+			username mavenUser
+			password mavenPassword
+		}
+		url "http://divvers.com/nexus/content/repositories/io.core9"
+	}
+	maven {
+		credentials {
+			username mavenUser
+			password mavenPassword
+		}
+		url 'http://divvers.com/nexus/content/repositories/core'
+	}
 	
 	maven {
 		credentials {
@@ -120,11 +135,11 @@ uploadArchives {
 		mavenDeployer {
 
 			repository(url: "http://divvers.com/nexus/content/repositories/io.core9") {
-				//TODO authentication(userName: "", password: "")
+				authentication(userName: mavenUser, password: mavenPassword)
 			}
 
 			snapshotRepository(url: 'http://divvers.com/nexus/content/repositories/core') {
-				//TODO authentication(userName: "", password: "")
+				authentication(userName: mavenUser, password: mavenPassword)
 			}
 
 
