@@ -21,7 +21,7 @@ sourceSets.impl.output.resourcesDir = sourceSets.impl.output.classesDir
 sourceSets.test.output.resourcesDir = sourceSets.test.output.classesDir
 
 task createDirs() {
-	file("lib").mkdirs()
+	//file("lib").mkdirs()
 	sourceSets*.java.srcDirs*.each { if(!it.toString().contains("src/main")) { it.mkdirs() } }
 	sourceSets*.resources.srcDirs*.each { if(!it.toString().contains("src/main")) { it.mkdirs() } }
 }
