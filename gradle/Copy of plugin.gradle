@@ -1,11 +1,13 @@
-//defaultTasks 'clean', 'compileApiContracts', 'compileImplContracts', 'test', 'jar', 'apiJavadocs', 'implJavadocs', 'findbugsApi', 'findbugsImpl'
 apply plugin: 'java'
 apply plugin: "maven"
 
-group = "io.core9"
-version = '1.0-SNAPSHOT'
-
-
+//TODO move JSPF to core, see ticket #28
+project.ext {
+	v = [
+		jspf: '1.0.0',
+	]
+	jspf = files("lib/jspf.core-1.0.0.jar")
+}
 
 /**
  * Source sets
@@ -65,16 +67,10 @@ task apiJavadocs(type: Javadoc) {
  */
 
 dependencies {
-
-	
-
-	compile 'io.core9:core-jspf:1.0-SNAPSHOT'
-
-	//compile jspf
+	compile jspf
+	compile 'io.core9:core-api:1.0-SNAPSHOT'
 
 	implCompile sourceSets.api.output
-	implCompile 'org.apache.commons:commons-lang3:3.1'
-	implCompile 'log4j:log4j:1.2.16'
 
 	testCompile 'junit:junit:4.11'
 	testCompile sourceSets.api.output
@@ -89,7 +85,6 @@ repositories {
 	mavenLocal()
 	mavenCentral()
 
-	
 	maven {
 		credentials {
 			username mavenUser
@@ -97,7 +92,6 @@ repositories {
 		}
 		url "http://divvers.com/nexus/content/repositories/io.core9"
 	}
-	
 	maven {
 		credentials {
 			username mavenUser
@@ -105,11 +99,16 @@ repositories {
 		}
 		url 'http://divvers.com/nexus/content/repositories/core'
 	}
-
-
+	
+	maven {
+		credentials {
+			//TODO
+			username ''
+			password ''
+		}
+		url 'https://bitbucket.org/core9/maven-repository/raw/master'
+	}
 }
-
-
 
 install {
 	repositories {
@@ -161,8 +160,32 @@ uploadArchives {
 	}
 }
 
+class Simple {
+	def redirectFollowingDownload( String url, String filename ) {
+		while( url ) {
+			new URL( url ).openConnection().with { conn ->
+				conn.instanceFollowRedirects = false
+				url = conn.getHeaderField( "Location" )
+				if( !url ) {
+					new File( filename ).withOutputStream { out ->
+						conn.inputStream.with { inp ->
+							out << inp
+							inp.close()
+						}
+					}
+				}
+			}
+		}
+	}
+}
 
-
-
-
-
+task downloadJar(){
+	jspf.each {
+		println it
+		println project.ext.jspf
+		url = "https://bitbucket.org/core9/maven-repository/raw/master/io/core9/jspf/core-${project.ext.v.jspf}/jspf.core-${project.ext.v.jspf}.jar"
+		println url
+		def s = new Simple()
+		s.redirectFollowingDownload(url, it.toString());
+	}
+}
