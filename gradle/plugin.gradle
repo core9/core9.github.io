@@ -109,16 +109,18 @@ repositories {
 
 
 install {
-	repositories.mavenInstaller {
-		addFilter("main") { artifact, file -> artifact.name == project.name }
-		["api", "impl"].each { type ->
-			addFilter(type) { artifact, file -> artifact.name.endsWith("-$type") }
+	repositories {
+		mavenInstaller {
+			addFilter("main") { artifact, file -> artifact.name == project.name }
+			["api", "impl"].each { type ->
+				addFilter(type) { artifact, file -> artifact.name.endsWith("-$type") }
 
-			// We now have to map our configurations to the correct maven scope for each pom
-			["compile", "runtime"].each { scope ->
-				configuration = configurations[type + scope.capitalize()]
-				["main", type].each { pomName ->
-					pom(pomName).scopeMappings.addMapping 1, configuration, scope
+				// We now have to map our configurations to the correct maven scope for each pom
+				["compile", "runtime"].each { scope ->
+					configuration = configurations[type + scope.capitalize()]
+					["main", type].each { pomName ->
+						pom(pomName).scopeMappings.addMapping 1, configuration, scope
+					}
 				}
 			}
 		}
@@ -127,30 +129,31 @@ install {
 
 
 uploadArchives {
-	repositories.mavenDeployer {
+	repositories {
+		mavenDeployer {
 
-		repository(url: "http://divvers.com/nexus/content/repositories/io.core9") {
-			authentication(userName: mavenUser, password: mavenPassword)
-		}
+			repository(url: "http://divvers.com/nexus/content/repositories/io.core9") {
+				authentication(userName: mavenUser, password: mavenPassword)
+			}
 
-		snapshotRepository(url: 'http://divvers.com/nexus/content/repositories/core') {
-			authentication(userName: mavenUser, password: mavenPassword)
-		}
+			snapshotRepository(url: 'http://divvers.com/nexus/content/repositories/core') {
+				authentication(userName: mavenUser, password: mavenPassword)
+			}
 
 
-		addFilter("main") { artifact, file -> artifact.name == project.name }
-		["api", "impl"].each { type ->
-			addFilter(type) { artifact, file -> artifact.name.endsWith("-$type") }
+			addFilter("main") { artifact, file -> artifact.name == project.name }
+			["api", "impl"].each { type ->
+				addFilter(type) { artifact, file -> artifact.name.endsWith("-$type") }
 
-			// We now have to map our configurations to the correct maven scope for each pom
-			["compile", "runtime"].each { scope ->
-				configuration = configurations[type + scope.capitalize()]
-				["main", type].each { pomName ->
-					pom(pomName).scopeMappings.addMapping 1, configuration, scope
+				// We now have to map our configurations to the correct maven scope for each pom
+				["compile", "runtime"].each { scope ->
+					configuration = configurations[type + scope.capitalize()]
+					["main", type].each { pomName ->
+						pom(pomName).scopeMappings.addMapping 1, configuration, scope
+					}
 				}
 			}
 		}
-
 	}
 }
 
