@@ -5,7 +5,10 @@ apply plugin: "maven"
 group = "io.core9"
 version = '1.0-SNAPSHOT'
 
-
+configurations.all {
+	// check for updates every build
+	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
 
 /**
  * Source sets
