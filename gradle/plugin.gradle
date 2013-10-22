@@ -74,6 +74,7 @@ dependencies {
 	implCompile 'org.apache.commons:commons-lang3:3.1'
 
 	testCompile 'junit:junit:4.11'
+	testCompile 'io.core9:core-impl:1.0-SNAPSHOT'
 	testCompile sourceSets.api.output
 	testCompile sourceSets.impl.output
 
