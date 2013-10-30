@@ -67,7 +67,7 @@ dependencies {
 
 
 	compile 'io.core9:core-api:1.0-SNAPSHOT'
-	compile 'io.core9:core9-jspf-1.0-SNAPSHOT:1.0-SNAPSHOT'
+	compile 'io.core9:core-jspf:1.0-SNAPSHOT'
 	
 	//compile 'io.core9:core-jspf:1.0-SNAPSHOT'
 	//compile 'io.core9:core-jspf:1.0-SNAPSHOT'
