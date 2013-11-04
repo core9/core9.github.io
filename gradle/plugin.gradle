@@ -47,10 +47,6 @@ compileJava {
 	sourceSets.api.compileClasspath += configurations.coreCompile
 }
 
-run {
-    classpath += configurations.coreCompile
-}
-
 
 /**
  * Documentation
