@@ -43,8 +43,12 @@ configurations {
 	implCompile.extendsFrom compile
 }
 
-compileJava {
-	sourceSets.api.compileClasspath += configurations.coreCompile
+compileApiJava {
+	sourceSets.impl.compileClasspath += configurations.coreCompile
+}
+
+compileImplJava {
+	sourceSets.impl.compileClasspath += configurations.coreCompile
 }
 
 
