@@ -19,18 +19,8 @@ sourceSets {
 	impl
 }
 
-sourceSets.api.output.resourcesDir = sourceSets.api.output.classesDir
 sourceSets.impl.output.resourcesDir = sourceSets.impl.output.classesDir
 sourceSets.test.output.resourcesDir = sourceSets.test.output.classesDir
-
-
-sourceSets.all { set ->
-	def jarTask = task("${set.name}Jar", type: Jar) {
-		baseName = baseName + "-$set.name"
-		from set.output
-	}
-	artifacts { archives jarTask }
-}
 
 jar {
 	from sourceSets.api.output
@@ -38,19 +28,9 @@ jar {
 }
 
 configurations {
-	coreCompile
 	apiCompile.extendsFrom compile
 	implCompile.extendsFrom compile
 }
-
-compileJava {
-	sourceSets.api.compileClasspath += configurations.coreCompile
-}
-
-run {
-    classpath += configurations.coreCompile
-}
-
 
 /**
  * Documentation
@@ -74,9 +54,22 @@ task apiJavadocs(type: Javadoc) {
 
 dependencies {
 
-	coreCompile 'io.core9:core-api:1.0-SNAPSHOT'
-	coreCompile 'io.core9:core-jspf:1.0-SNAPSHOT'
+
+
+	compile 'io.core9:core-api:1.0-SNAPSHOT'
+	compile 'io.core9:core-jspf:1.0-SNAPSHOT'
+	
+	//compile 'io.core9:core-jspf:1.0-SNAPSHOT'
+	//compile 'io.core9:core-jspf:1.0-SNAPSHOT'
+	//compile 'io.core9:core-jspf-impl:1.0-SNAPSHOT'
+	//compile 'io.core9:core-jspf-api:1.0-SNAPSHOT'
+	
+	
+	compile 'org.slf4j:slf4j-log4j12:1.7.5'
+	compile 'log4j:log4j:1.2.17'
+
 	implCompile sourceSets.api.output
+	implCompile 'org.apache.commons:commons-lang3:3.1'
 
 	testCompile 'junit:junit:4.11'
 	testCompile 'io.core9:core-impl:1.0-SNAPSHOT'
