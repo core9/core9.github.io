@@ -4,10 +4,8 @@ apply plugin: 'eclipse'
 apply plugin: 'sonar-runner'
 apply plugin: 'maven-publish'
 
-group = "io.core9"
-
 ext.buildTimestamp = new Date().format("yyyy-MM-dd HH:mm:ss")
-version = new ProjectVersion(1, 0, System.env.BUILD_NUMBER)
+version = new ProjectVersion(version, System.env.BUILD_NUMBER)
 
 jar.enabled = false
 
@@ -170,19 +168,17 @@ task wrapper(type: Wrapper) {
 }
 
 class ProjectVersion {
-	Integer major
-	Integer minor
+	Integer version
 	String build
 	
-	ProjectVersion(Integer major, Integer minor, String build) {
-		this.major = major
-		this.minor = minor
+	ProjectVersion(String version, String build) {
+		this.version = version
 		this.build = build
 	}
 	
 	@Override
 	String toString() {
-		String fullVersion = "$major.$minor"
+		String fullVersion = "$version"
 		
 		if(build) {
 			fullVersion += ".$build"
