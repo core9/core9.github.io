@@ -5,7 +5,8 @@ apply plugin: 'sonar-runner'
 apply plugin: 'maven-publish'
 
 ext.buildTimestamp = new Date().format("yyyy-MM-dd HH:mm:ss")
-version = new ProjectVersion(version, System.env.BUILD_NUMBER)
+version = new ProjectVersion(projectVersion, System.env.BUILD_NUMBER)
+group = projectGroup
 
 jar.enabled = false
 
