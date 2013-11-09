@@ -95,7 +95,7 @@ sonarRunner {
 publishing {
 	publications {
 		api(MavenPublication) {
-			artifactId project.name + '-api'
+			artifactId = project.name + '-api'
 			artifact apiJar
 			pom.withXml {
 				def deps = asNode().appendNode('dependencies')
@@ -110,7 +110,7 @@ publishing {
 			}
 		}
 		impl(MavenPublication) {
-			artifactId project.name + '-impl'
+			artifactId = project.name + '-impl'
 			artifact implJar
 			pom.withXml {
 				def deps = asNode().appendNode('dependencies')
