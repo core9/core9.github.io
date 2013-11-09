@@ -168,7 +168,7 @@ task wrapper(type: Wrapper) {
 }
 
 class ProjectVersion {
-	Integer version
+	String version
 	String build
 	
 	ProjectVersion(String version, String build) {
