@@ -1,9 +1,15 @@
-//defaultTasks 'clean', 'compileApiContracts', 'compileImplContracts', 'test', 'jar', 'apiJavadocs', 'implJavadocs', 'findbugsApi', 'findbugsImpl'
+//defaultTasks 'clean', 'test', 'build', ['sonar-runner', 'publishToMavenLocal']
 apply plugin: 'java'
-apply plugin: "maven"
+apply plugin: 'eclipse'
+apply plugin: 'sonar-runner'
+apply plugin: 'maven-publish'
 
 group = "io.core9"
-version = '1.0-SNAPSHOT'
+
+ext.buildTimestamp = new Date().format("yyyy-MM-dd HH:mm:ss")
+version = new ProjectVersion(1, 0, System.env.BUILD_NUMBER)
+
+jar.enabled = false
 
 configurations.all {
 	// check for updates every build
@@ -19,53 +25,41 @@ sourceSets {
 	impl
 }
 
-sourceSets.api.output.resourcesDir = sourceSets.api.output.classesDir
-sourceSets.impl.output.resourcesDir = sourceSets.impl.output.classesDir
-sourceSets.test.output.resourcesDir = sourceSets.test.output.classesDir
-
-
-sourceSets.all { set ->
-	def jarTask = task("${set.name}Jar", type: Jar) {
-		baseName = baseName + "-$set.name"
-		from set.output
-	}
-	artifacts { archives jarTask }
-}
-
-jar {
-	from sourceSets.api.output
-	from sourceSets.impl.output
-}
-
+/**
+ * Configurations
+ * coreCompile are libraries available from core (other plugins), that don't need to be exported in to a distribution
+ */
 configurations {
 	coreCompile
 	apiCompile.extendsFrom compile
 	implCompile.extendsFrom compile
 }
-
-compileApiJava {
-	sourceSets.impl.compileClasspath += configurations.coreCompile
-}
-
-compileImplJava {
-	sourceSets.impl.compileClasspath += configurations.coreCompile
-}
-
-
 /**
- * Documentation
+ * Export the coreCompile libs for eclipse
  */
+eclipse.classpath.plusConfigurations += configurations.coreCompile
 
-task implJavadocs(type: Javadoc) {
-	source = sourceSets.impl.allJava
-	classpath = sourceSets.impl.runtimeClasspath
-	destinationDir = reporting.file("impl-docs")
-}
+sourceSets.impl.compileClasspath += sourceSets.api.runtimeClasspath
 
-task apiJavadocs(type: Javadoc) {
-	source = sourceSets.api.allJava
-	classpath = sourceSets.api.runtimeClasspath
-	destinationDir = reporting.file("api-docs")
+sourceSets.all { set ->
+	if(set.name == "main") return
+	def jarTask = task("${set.name}Jar", type: Jar) {
+		baseName = baseName + "-$set.name"
+		from set.output
+	}
+	artifacts { archives jarTask }
+	
+	set.compileClasspath += configurations.coreCompile
+	set.runtimeClasspath += configurations.coreCompile
+	
+	def docsTask = task("${set.name}Docs", type: Javadoc) {
+		source = set.allJava
+		classpath = set.runtimeClasspath
+		destinationDir = reporting.file("${set.name}-docs")
+	}
+	
+	set.java.srcDirs.each { it.mkdirs() }
+	set.resources.srcDirs.each { it.mkdirs() }
 }
 
 /**
@@ -76,22 +70,76 @@ dependencies {
 
 	coreCompile 'io.core9:core-api:1.0-SNAPSHOT'
 	coreCompile 'io.core9:core-jspf:1.0-SNAPSHOT'
-	implCompile sourceSets.api.output
 
 	testCompile 'junit:junit:4.11'
 	testCompile 'io.core9:core-impl:1.0-SNAPSHOT'
+	
 	testCompile sourceSets.api.output
 	testCompile sourceSets.impl.output
 
-	runtime configurations.apiRuntime
-	runtime configurations.implRuntime
+}
 
+sonarRunner {
+	sonarProperties {
+		property "sonar.host.url", "http://build.core9.io:9000"
+		property "sonar.jdbc.url", "jdbc:mysql://build.core9.io/sonar"
+		property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+		property "sonar.jdbc.username", sonarUsername
+		property "sonar.jdbc.password", sonarPassword
+		
+		properties["sonar.sources"] = sourceSets.api.allSource.srcDirs
+		properties["sonar.sources"] += sourceSets.impl.allSource.srcDirs
+	}
+}
+
+publishing {
+	publications {
+		api(MavenPublication) {
+			artifactId project.name + '-api'
+			artifact apiJar
+			pom.withXml {
+				def deps = asNode().appendNode('dependencies')
+				['compile','coreCompile','apiCompile'].each { conf ->
+					configurations[conf].dependencies.each { s ->
+					def dep = deps.appendNode('dependency')
+						dep.appendNode('groupId', s.group.trim())
+						dep.appendNode('artifactId', s.name.trim())
+						dep.appendNode('version', s.version.trim())
+					}
+				}
+			}
+		}
+		impl(MavenPublication) {
+			artifactId project.name + '-impl'
+			artifact implJar
+			pom.withXml {
+				def deps = asNode().appendNode('dependencies')
+				['compile','coreCompile','implCompile'].each { conf -> 
+					configurations[conf].dependencies.each { s ->
+					def dep = deps.appendNode('dependency')
+						dep.appendNode('groupId', s.group.trim())
+						dep.appendNode('artifactId', s.name.trim())
+						dep.appendNode('version', s.version.trim())
+					}
+				}
+			}
+		}
+	}
+	
+	repositories {
+		maven {
+			url "http://build.core9.io:8081/artifactory/libs-release-local"
+			credentials {
+				username artifactoryUser
+				password artifactoryPassword
+			}
+		}
+	}
 }
 
 repositories {
 	mavenLocal()
 	mavenCentral()
-
 
 	maven {
 		credentials {
@@ -108,63 +156,32 @@ repositories {
 		}
 		url 'http://divvers.com/nexus/content/repositories/core'
 	}
-
-
 }
 
+task wrapper(type: Wrapper) {
+	gradleVersion = '1.8'
+}
 
-
-install {
-	repositories {
-		mavenInstaller {
-			addFilter("main") { artifact, file -> artifact.name == project.name }
-			["api", "impl"].each { type ->
-				addFilter(type) { artifact, file -> artifact.name.endsWith("-$type") }
-
-				// We now have to map our configurations to the correct maven scope for each pom
-				["compile", "runtime"].each { scope ->
-					configuration = configurations[type + scope.capitalize()]
-					["main", type].each { pomName ->
-						pom(pomName).scopeMappings.addMapping 1, configuration, scope
-					}
-				}
-			}
+class ProjectVersion {
+	Integer major
+	Integer minor
+	String build
+	
+	ProjectVersion(Integer major, Integer minor, String build) {
+		this.major = major
+		this.minor = minor
+		this.build = build
+	}
+	
+	@Override
+	String toString() {
+		String fullVersion = "$major.$minor"
+		
+		if(build) {
+			fullVersion += ".$build"
+		} else {
+			fullVersion += "-SNAPSHOT"
 		}
+		fullVersion
 	}
 }
-
-
-uploadArchives {
-	repositories {
-		mavenDeployer {
-
-			repository(url: "http://divvers.com/nexus/content/repositories/io.core9") {
-				authentication(userName: mavenUser, password: mavenPassword)
-			}
-
-			snapshotRepository(url: 'http://divvers.com/nexus/content/repositories/core') {
-				authentication(userName: mavenUser, password: mavenPassword)
-			}
-
-
-			addFilter("main") { artifact, file -> artifact.name == project.name }
-			["api", "impl"].each { type ->
-				addFilter(type) { artifact, file -> artifact.name.endsWith("-$type") }
-
-				// We now have to map our configurations to the correct maven scope for each pom
-				["compile", "runtime"].each { scope ->
-					configuration = configurations[type + scope.capitalize()]
-					["main", type].each { pomName ->
-						pom(pomName).scopeMappings.addMapping 1, configuration, scope
-					}
-				}
-			}
-		}
-	}
-}
-
-
-
-
-
-
