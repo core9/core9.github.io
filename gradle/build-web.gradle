@@ -1,0 +1,20 @@
+apply from: 'http://www.core9.tv/gradle/project.gradle'
+
+/**
+ * Build a web project
+ * @return
+ */
+dependencies {
+	compile 'io.core9:plugin-server-vertx-api:+'
+	compile 'io.core9:plugin-server-vertx-impl:+'
+	compile 'io.core9:plugin-thumbnails-api:+'
+}
+
+/**
+ * Custom tasks per project profile
+ */
+task projectSetup(dependsOn: 'core9setup') << {
+	["static"].each { k ->
+		new File(project.getBuildDir(), 'install/app/' + k).mkdirs()
+	}
+}
