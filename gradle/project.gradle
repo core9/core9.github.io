@@ -48,6 +48,9 @@ task core9setup(dependsOn: 'installApp') << {
 	println '================================================================'
 }
 
+task wrapper(type: Wrapper) {
+	gradleVersion = '1.8'
+}
 
 class ProjectVersion {
 	String version
