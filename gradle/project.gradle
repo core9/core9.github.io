@@ -4,6 +4,11 @@ version = new ProjectVersion(projectVersion, System.env.BUILD_NUMBER)
 
 mainClassName = "io.core9.core.boot.BootstrapFramework"
 
+configurations.all {
+	// check for updates every build
+	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
 dependencies {
 	compile 'io.core9:core-api:1.+'
 	compile 'io.core9:core-impl:1.+'
