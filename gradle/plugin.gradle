@@ -70,7 +70,7 @@ sourceSets.all { set ->
 dependencies {
 
 	coreCompile 'io.core9:core-api:+'
-	coreCompile 'io.core9:core-jspf:+'
+	//coreCompile 'io.core9:core-jspf:+'
 
 	testCompile 'junit:junit:4.11'
 	testCompile 'io.core9:core-impl:+'
@@ -148,6 +148,13 @@ repositories {
 			password artifactoryPassword
 		}
 		url "http://build.core9.io:8081/artifactory/libs-release-local"
+	}
+	maven {
+		credentials {
+			username artifactoryUser
+			password artifactoryPassword
+		}
+		url "http://build.core9.io:8081/artifactory/ext-release-local"
 	}
 	maven {
 		credentials {
