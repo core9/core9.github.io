@@ -123,6 +123,15 @@ publishing {
 						dep.appendNode('version', s.version.trim())
 					}
 				}
+				['testCompile'].each { conf -> 
+					configurations[conf].dependencies.each { s ->
+					def dep = deps.appendNode('dependency')
+						dep.appendNode('groupId', s.group.trim())
+						dep.appendNode('artifactId', s.name.trim())
+						dep.appendNode('version', s.version.trim())
+						dep.appendNode('scope', 'test')
+					}
+				}
 			}
 		}
 	}
@@ -198,3 +207,4 @@ class ProjectVersion {
 		fullVersion
 	}
 }
+
