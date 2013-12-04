@@ -125,12 +125,13 @@ publishing {
 				}
 				['testCompile'].each { conf -> 
 					configurations[conf].dependencies.each { s ->
-					print s
-					def dep = deps.appendNode('dependency')
-						dep.appendNode('groupId', s.group.trim())
-						dep.appendNode('artifactId', s.name.trim())
-						dep.appendNode('version', s.version.trim())
-						dep.appendNode('scope', 'test')
+					if(s.group != null) {
+						def dep = deps.appendNode('dependency')
+							dep.appendNode('groupId', s.group.trim())
+							dep.appendNode('artifactId', s.name.trim())
+							dep.appendNode('version', s.version.trim())
+							dep.appendNode('scope', 'test')
+						}
 					}
 				}
 			}
