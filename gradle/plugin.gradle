@@ -123,8 +123,9 @@ publishing {
 						dep.appendNode('version', s.version.trim())
 					}
 				}
-				/*['testCompile'].each { conf -> 
+				['testCompile'].each { conf -> 
 					configurations[conf].dependencies.each { s ->
+					print s
 					def dep = deps.appendNode('dependency')
 						dep.appendNode('groupId', s.group.trim())
 						dep.appendNode('artifactId', s.name.trim())
@@ -132,7 +133,6 @@ publishing {
 						dep.appendNode('scope', 'test')
 					}
 				}
-				*/
 			}
 		}
 	}
