@@ -1,0 +1,81 @@
+apply plugin: 'application'
+apply plugin: 'docker'
+	
+version = new ProjectVersion(projectVersion, System.env.BUILD_NUMBER)
+
+mainClassName = "io.core9.core.boot.BootstrapFramework"
+
+configurations.all {
+	// check for updates every build
+	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+dependencies {
+	compile 'io.core9:core-api:1.+'
+	compile 'io.core9:core-impl:1.+'
+}
+	
+repositories {
+	maven {
+		url "http://build.core9.io:8081/artifactory/libs-release"
+	}
+	maven {
+		credentials {
+			username mavenUser
+			password mavenPassword
+		}
+		url "http://divvers.com/nexus/content/repositories/io.core9"
+	}
+
+	maven {
+		credentials {
+			username mavenUser
+			password mavenPassword
+		}
+		url 'http://divvers.com/nexus/content/repositories/core'
+	}
+}
+
+/**
+ * Sets up the application directory
+ */
+task core9setup(dependsOn: 'installApp') << {
+	ext.installdir = new File(project.getBuildDir(), 'install/' + project.getName())
+	ext.installdir.renameTo(new File(project.getBuildDir(), "install/app"))
+	
+	println ''
+	println '================================================================'
+	println String.format("%s %18s" ,'| Core9  Report - Succesfully built version: ', "$version |");
+	println '================================================================'
+	println '| Your application can now be started, run it from the app/bin'
+	println '| directory:'
+	println '| \$ cd ' + new File(project.getBuildDir(), 'install/app/bin').getAbsolutePath();
+	println '| \$ ./' + project.getName();
+	println '================================================================'
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '1.8'
+}
+
+class ProjectVersion {
+	String version
+	String build
+	
+	ProjectVersion(String version, String build) {
+		this.version = version
+		this.build = build
+	}
+	
+	@Override
+	String toString() {
+		String fullVersion = "$version"
+		
+		if(build) {
+			fullVersion += ".$build"
+		} else {
+			fullVersion += "-SNAPSHOT"
+		}
+		fullVersion
+	}
+}
