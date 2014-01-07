@@ -9,6 +9,11 @@ buildscript {
 
 apply plugin: 'docker'
 
+docker {
+    baseImage "core9/base"
+    maintainer 'Mark Wienk "mark.wienk@core9.io"'
+}
+
 version = new ProjectVersion(projectVersion, System.env.BUILD_NUMBER)
 
 mainClassName = "io.core9.core.boot.BootstrapFramework"
