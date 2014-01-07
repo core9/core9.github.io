@@ -1,6 +1,13 @@
 apply plugin: 'application'
 apply plugin: 'docker'
 	
+buildscript {
+    repositories { mavenCentral() }
+    dependencies {
+        classpath 'se.transmode.gradle:gradle-docker:1.0'
+    }
+}
+
 version = new ProjectVersion(projectVersion, System.env.BUILD_NUMBER)
 
 mainClassName = "io.core9.core.boot.BootstrapFramework"

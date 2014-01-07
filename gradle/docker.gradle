@@ -1,5 +1,4 @@
 apply plugin: 'application'
-apply plugin: 'docker'
 	
 buildscript {
     repositories { mavenCentral() }
@@ -7,6 +6,8 @@ buildscript {
         classpath 'se.transmode.gradle:gradle-docker:1.0'
     }
 }
+
+apply plugin: 'docker'
 
 version = new ProjectVersion(projectVersion, System.env.BUILD_NUMBER)
 
