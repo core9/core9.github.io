@@ -1,0 +1,12 @@
+{
+	"name": "plugin-example",
+	"description": "An example plugin for the Core9 Dashboard",
+	"dependencies": {
+		"grunt-contrib-clean": "~0.5.0",
+		"grunt-contrib-concat": "~0.3.0",
+		"grunt-contrib-copy": "~0.5.0",
+		"grunt-contrib-uglify": "~0.2.7",
+		"grunt-html2js": "~0.2.4",
+		"grunt-ngmin": "~0.0.3"
+	}
+}
