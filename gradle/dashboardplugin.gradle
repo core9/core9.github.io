@@ -38,11 +38,11 @@ grunt_build.dependsOn installGrunt
 // runs "grunt build" as part of your gradle build
 build.dependsOn grunt_build
 
-def f = new File('gruntfile.js')
+File f = file('gruntfile.js')
 if (!f.exists()) {
 	new URL('http://www.core9.tv/gradle/grunt/gruntfile.js').withInputStream{ i -> f.withOutputStream{ it << i }}
 }
-f = new File('package.json')
+f = file('package.json')
 if (!f.exists()) {
 	new URL('http://www.core9.tv/gradle/grunt/package.json').withInputStream{ i -> f.withOutputStream{ it << i }}
 }
