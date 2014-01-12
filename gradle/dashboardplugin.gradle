@@ -26,7 +26,7 @@ apply plugin: com.moowork.gradle.node.NodePlugin
 
 node {
     // Version of node to use.
-    version = '0.11.9'
+    version = '0.10.24'
 
     // Enabled the automatic download. False is the default (for now).
     download = true
