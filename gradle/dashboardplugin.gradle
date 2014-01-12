@@ -1,0 +1,40 @@
+apply from: 'http://www.core9.tv/gradle/plugin.gradle'
+
+sourceSets.impl.java.srcDir "src/impl/js"
+sourceSets.impl.java.srcDirs.each { it.mkdirs() }
+sourceSets.test.java.srcDir "src/test/js"
+sourceSets.test.java.srcDirs.each { it.mkdirs() }
+
+buildscript {
+    repositories {
+		maven {
+                credentials {
+                        username artifactoryUser
+                        password artifactoryPassword
+                }
+                url "http://build.core9.io:8081/artifactory/libs-release"
+        }
+	}
+    dependencies {
+        classpath 'com.moowork.gradle:gradle-grunt-plugin:+'
+        classpath 'com.moowork.gradle:gradle-node-plugin:+'
+    }
+}
+
+apply plugin: com.moowork.gradle.grunt.GruntPlugin
+apply plugin: com.moowork.gradle.node.NodePlugin
+
+node {
+    // Version of node to use.
+    version = '0.11.9'
+
+    // Enabled the automatic download. False is the default (for now).
+    download = true
+}
+
+// makes sure on each build that grunt is installed
+grunt_build.dependsOn installGrunt
+
+// runs "grunt build" as part of your gradle build
+build.dependsOn grunt_build
+
