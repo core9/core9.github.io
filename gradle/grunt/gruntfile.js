@@ -4,6 +4,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-wait');
 	grunt.loadNpmTasks('grunt-html2js');
 	grunt.loadNpmTasks('grunt-ngmin');
 
@@ -33,11 +36,8 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
-	
+
 		html2js: {
-			/**
-			 *These are the templates from `src/app`.
-			 */
 			app: {
 				options: {
 					base: 'src/impl/js',
@@ -47,7 +47,7 @@ module.exports = function(grunt) {
 				dest: 'build/impl/js/templates.js'
 			}
 		},
-		
+
 		uglify: {
 			compile: {
 				options: {
@@ -58,7 +58,7 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		
+
 		ngmin: {
 			compile: {
 				files: [{
@@ -69,10 +69,68 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
+
+		jshint: {
+			src: ['src/impl/js/**/*.js'],
+			gruntfile: ['gruntfile.js'],
+			options: {
+				curly: true,
+				immed: true,
+				newcap: true,
+				noarg: true,
+				sub: true,
+				boss: true,
+				eqnull: true
+			},
+			globals: {}
+		},
+
+
+		delta: {
+			options: {
+				livereload: true
+			},
+
+			gruntfile: {
+				files: 'gruntfile.js',
+				tasks: [ 'jshint:gruntfile' ],
+				options: {
+					livereload: false
+				}
+			},
+
+			jssrc: {
+				files: ['src/impl/js/**/*.js'],
+				tasks: ['jshint:src', 'copy:build_js', 'ngmin', 'concat', 'wait']
+			},
+
+			tpls: {
+				files: ['src/impl/js/**/*.tpl.html'],
+				tasks: ['html2js', 'ngmin', 'concat', 'wait']
+			},
+		},
 		
+		wait: {
+			options: {
+				delay: 5000
+			},
+			
+			pause: { 
+				options: {
+					before : function(options) {
+						console.log('Waiting to reload: %dms ms', options.delay);
+					},
+					after : function() {
+						console.log('Reloading now!');
+					}
+				}
+			}
+		},
+
 		clean: ['build/impl/js']
 	});
-	
+	grunt.renameTask('watch','delta');
+	grunt.registerTask('watch', ['build', 'delta']);
 	grunt.registerTask('build', ['clean', 'copy:build_js', 'html2js', 'ngmin', 'concat', 'uglify']);
 	grunt.registerTask('default', ['build']);
 };
