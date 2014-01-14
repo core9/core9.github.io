@@ -1,6 +1,6 @@
 {
 	"name": "plugin-example",
-	"description": "An example plugin for the Core9 Dashboard",
+	"description": "This is an example plugin, please use a plugin description",
 	"dependencies": {
 		"grunt-contrib-clean": "~0.5.0",
 		"grunt-contrib-concat": "~0.3.0",
