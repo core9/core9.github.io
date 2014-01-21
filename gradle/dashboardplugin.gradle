@@ -1,4 +1,4 @@
-apply from: 'http://www.core9.tv/gradle/plugin.gradle'
+apply from: 'https://raw2.github.com/core9/core9.github.io/master/gradle/plugin.gradle'
 
 sourceSets.impl.java.srcDir "src/impl/js"
 sourceSets.impl.java.srcDirs.each { it.mkdirs() }
