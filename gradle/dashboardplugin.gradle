@@ -40,11 +40,11 @@ build.dependsOn grunt_build
 
 File f = file('gruntfile.js')
 if (!f.exists()) {
-	new URL('http://www.core9.tv/gradle/grunt/gruntfile.js').withInputStream{ i -> f.withOutputStream{ it << i }}
+	new URL('https://raw2.github.com/core9/core9.github.io/master/gradle/grunt/gruntfile.js').withInputStream{ i -> f.withOutputStream{ it << i }}
 }
 f = file('package.json')
 if (!f.exists()) {
-	new URL('http://www.core9.tv/gradle/grunt/package.json').withInputStream{ i -> f.withOutputStream{ it << i }}
+	new URL('https://raw2.github.com/core9/core9.github.io/master/gradle/grunt/package.json').withInputStream{ i -> f.withOutputStream{ it << i }}
 }
 
 
