@@ -16,22 +16,11 @@ dependencies {
 	
 repositories {
 	maven {
+		credentials {
+			username artifactoryUser
+			password artifactoryPassword
+		}
 		url "http://build.core9.io:8081/artifactory/libs-release"
-	}
-	maven {
-		credentials {
-			username mavenUser
-			password mavenPassword
-		}
-		url "http://divvers.com/nexus/content/repositories/io.core9"
-	}
-
-	maven {
-		credentials {
-			username mavenUser
-			password mavenPassword
-		}
-		url 'http://divvers.com/nexus/content/repositories/core'
 	}
 }
 
@@ -54,7 +43,7 @@ task core9setup(dependsOn: 'installApp') << {
 }
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '1.8'
+	gradleVersion = '1.10'
 }
 
 class ProjectVersion {
