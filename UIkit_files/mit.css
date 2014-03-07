@@ -1,0 +1,82 @@
+/* ::::: http://opensource.org/files/css/css_pbm0lsQQJ7A7WCCIMgxLho6mI_kBNgznNUWmTWcnfoE.css ::::: */
+
+.container-inline div, .container-inline label { display: inline; }
+.element-invisible { position: absolute ! important; clip: rect(1px, 1px, 1px, 1px); overflow: hidden; height: 1px; }
+.element-invisible.element-focusable:active, .element-invisible.element-focusable:focus { position: static ! important; clip: auto; overflow: visible; height: auto; }
+.clearfix:after { content: "."; display: block; height: 0px; clear: both; visibility: hidden; }
+:first-child + html .clearfix { min-height: 1%; }
+ul.menu { border: medium none; list-style: none outside none; text-align: left; }
+ul.menu li { margin: 0px 0px 0px 0.5em; }
+ul li.collapsed { list-style-image: url('menu-collapsed.png'); list-style-type: disc; }
+ul li.leaf { list-style-image: url('menu-leaf.png'); list-style-type: square; }
+li.expanded, li.collapsed, li.leaf { padding: 0.2em 0.5em 0px 0px; margin: 0px; }
+.breadcrumb { padding-bottom: 0.5em; }
+form { margin: 0px; padding: 0px; }
+img { border: 0px none; }
+.form-item, .form-actions { margin-top: 1em; margin-bottom: 1em; }
+label { display: block; font-weight: bold; }
+.container-inline .form-actions, .container-inline.form-actions { margin-top: 0px; margin-bottom: 0px; }
+/* ::::: http://opensource.org/files/css/css_SUL4nLPHzR3nTjXtabIi37KnqgcaT9eAQRNBvMXWGXs.css ::::: */
+
+/* ::::: http://opensource.org/files/css/css_2wI77kyP-rJKVpFW5M3KFcj7Cb99lZalmubKIwWwsmU.css ::::: */
+
+body { margin: 0px; padding: 0px; background: none repeat scroll 0% 0% rgb(237, 244, 249); font: 76%/170% Verdana,sans-serif; color: rgb(73, 73, 73); }
+input { font: 1em/100% Verdana,sans-serif; color: rgb(73, 73, 73); }
+h1, h2, h3, h4, h5, h6 { margin: 0px; padding: 0px; font-weight: normal; font-family: Helvetica,Arial,sans-serif; }
+h1 { font-size: 170%; }
+h2, #center h1 { font-size: 160%; line-height: 130%; }
+p { margin: 0.6em 0px 1.2em; padding: 0px; }
+a:link, a:visited { color: rgb(2, 122, 198); text-decoration: none; }
+a:hover { color: rgb(0, 97, 160); text-decoration: underline; }
+a:active, a.active { color: rgb(88, 148, 190); }
+ul, .block ul, ol { margin: 0.5em 0px 1em; padding: 0px 0px 0px 1.5em; }
+ul, ul li.leaf { list-style-image: url('menu-leaf.gif'); }
+ul.menu, .item-list ul { margin: 0.35em 0px 0px -0.5em; }
+ol li, ul li, ul.menu li, .item-list ul li, li.leaf { margin: 0.15em 0px 0.15em 0.5em; padding-bottom: 0.1em; }
+ul li.collapsed { list-style-image: url('menu-collapsed.gif'); }
+ul li.leaf a, ul li.expanded a, ul li.collapsed a { display: block; }
+img, a img { border: medium none; }
+.form-actions { margin: 2em 0px 1em; }
+.form-button, .form-submit { margin: 0px 0.5em 0px 0px; }
+#skip-link { left: 50%; margin-left: -5.25em; margin-top: 0px; position: absolute; width: auto; z-index: 1000; }
+#skip-link a, #skip-link a:link, #skip-link a:visited { background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.6); color: rgb(255, 255, 255); display: block; font-size: 0.94em; line-height: 1.7; margin-top: 1px; padding: 2px 10px; text-decoration: none; border-radius: 0px 0px 2px 2px; }
+#skip-link a:hover, #skip-link a:active, #skip-link a:focus { outline: 0px none; }
+#wrapper { background: url('body.png') repeat-x scroll 50% 0px rgb(237, 244, 249); }
+#wrapper #container { width: 560px; margin: 0px auto; padding: 0px 20px; }
+body.one-sidebar #wrapper #container { width: 770px; }
+body.fluid-width #wrapper #container { width: auto; max-width: 1270px; }
+#wrapper #container #header { height: 80px; }
+#wrapper #container #header #logo-floater { position: absolute; }
+#branding, #branding a:link, #branding a:visited { line-height: 120px; position: relative; z-index: 2; white-space: nowrap; }
+#branding span { font-weight: bold; }
+#branding img { padding-top: 14px; padding-right: 20px; float: left; }
+body.sidebar-first, body.sidebar-second { min-width: 780px; }
+#wrapper #container #center { float: left; width: 100%; }
+body.sidebar-first #center { margin-left: -210px; }
+body.sidebar-first #squeeze { margin-left: 210px; }
+#wrapper #container .sidebar { margin: 60px 0px 5em; width: 210px; float: left; z-index: 2; position: relative; }
+#wrapper #container .sidebar .block { margin: 0px 0px 1.5em; }
+#sidebar-first .block { padding: 0px 15px 0px 0px; }
+.block .content { margin: 0.5em 0px; }
+#wrapper #container #center #squeeze { background: url('bg-content.png') repeat-x scroll 50% 0px rgb(255, 255, 255); position: relative; }
+#wrapper #container #center .right-corner { background: url('bg-content-right.png') no-repeat scroll 100% 0px transparent; position: relative; left: 10px; }
+#wrapper #container #center .right-corner .left-corner { padding: 60px 25px 5em 35px; background: url('bg-content-left.png') no-repeat scroll 0px 0px transparent; margin-left: -10px; position: relative; left: -10px; min-height: 400px; }
+#wrapper #container .region-footer { float: none; clear: both; text-align: center; margin: 4em 0px -3em; color: rgb(137, 137, 137); }
+#wrapper #container .breadcrumb { position: absolute; top: 15px; left: 35px; z-index: 3; }
+body.sidebar-first .region-footer { margin-left: -210px; }
+div#branding { font-family: Helvetica,Arial,sans-serif; }
+div#branding strong { font-weight: normal; }
+#branding, #branding a:link, #branding a:visited { color: rgb(255, 255, 255); text-shadow: 0px 1px 3px rgb(22, 88, 172); font-size: 1.5em; }
+#branding a:hover { text-decoration: none; }
+#wrapper #container .breadcrumb { font-size: 0.92em; }
+#wrapper #container .breadcrumb, #wrapper #container .breadcrumb a { color: rgb(82, 153, 214); }
+#tabs-wrapper { margin: 0px -26px 1em; padding: 0px 26px; border-bottom: 1px solid rgb(233, 238, 243); position: relative; }
+h1.with-tabs { float: left; margin: 0px 2em 0px 0px; padding: 0px; }
+.node { border-bottom: 1px solid rgb(233, 238, 243); margin: 0px -16px 1.5em; padding: 1.5em 16px; }
+.node .links, .comment .links { text-align: left; padding-left: 0px; }
+.node .content, .comment .content { margin: 0.6em 0px; }
+:first-child + html fieldset { padding: 0px 1em 1em; background-position: 0px 0.75em; background-color: transparent; }
+:first-child + html .text-format-wrapper .filter-wrapper { padding: 1.5em 0px; background-position: 0px 0px; }
+:first-child + html fieldset.filter-wrapper, :first-child + html fieldset.vertical-tabs-pane { background-position: 0px 0px; }
+:first-child + html fieldset .fieldset-wrapper .fieldset-description { padding-top: 1em; }
+div.admin-panel, div.admin-panel .description, div.admin-panel .body, div.admin, div.admin .left, div.admin .right, div.admin .expert-link, div.item-list, .menu { margin: 0px; padding: 0px; }

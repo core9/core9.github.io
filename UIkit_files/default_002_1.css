@@ -1,0 +1,4 @@
+body { margin: 50px; font: 13px arial,sans-serif; }
+a { color: rgb(1, 82, 166); cursor: pointer; outline: medium none; text-decoration: none; }
+.oz_footer { font-size: 13px; text-align: center; margin-top: 40px; }
+h1 { font-size: 17px; }
