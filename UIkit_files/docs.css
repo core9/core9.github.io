@@ -185,12 +185,12 @@ html { overflow-y: scroll; }
     right: -1px;
     left: -1px;
     bottom: -1px;
-    background: #0BA1D8;
+    background: #092230;
 }
 
 .tm-panel-link:hover:after { display: block; }
 
-.tm-panel-link:hover h2 { color: #0BA1D8; }
+.tm-panel-link:hover h2 { color: #092230; }
 
 /* Only phones */
 .tm-grid-margin-large .uk-grid-margin { margin-top: 50px; }
@@ -214,7 +214,7 @@ html { overflow-y: scroll; }
     width: 0;
     height: 0;
     margin-left: -10px;
-    border: 10px solid #0BA1D8;
+    border: 10px solid #092230;
     border-right-color: transparent;
     border-left-color: transparent;
     border-bottom: none;
@@ -711,3 +711,16 @@ input.sp-input {
 .sp-hue { font: inherit; }
 
 .sp-input-container { margin-bottom: 10px; }
+
+
+::-moz-selection {
+	background: #032335 ;
+	color: #fff;
+	text-shadow: none
+}
+
+::selection {
+	background: #032335;
+	color: #fff;
+	text-shadow: none
+}
