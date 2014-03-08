@@ -64,6 +64,7 @@ html { overflow-y: scroll; }
 }
 
 
+
 /*
  * Middle
  */
@@ -96,9 +97,24 @@ html { overflow-y: scroll; }
 
 /* Desktop and bigger */
 @media (max-width: 959px) {
+	
 
     .tm-section-color-1 { background-image: none; }
 
+}
+
+
+/* Desktop and bigger */
+/* Desktop and bigger */
+@media (max-width: 1624px) {
+		#core9 {
+		font-size:19em;
+	}
+}
+@media (max-width: 1024px) {
+		#core9 {
+		font-size:19em;
+	}
 }
 
 .tm-section-color-2 { background: #4D6665; }
