@@ -129,7 +129,7 @@ html { overflow-y: scroll; }
     box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
     background: #fff;
     border: none;
-    color: #2ba3d4 !important;
+    color: #042431 !important;
     /* Size */
     min-height: 50px;
     padding: 0 30px;
@@ -138,7 +138,7 @@ html { overflow-y: scroll; }
 }
 
 .tm-button-download:hover {
-    background: #82cff0;
+    background: #212F35;
     color: #fff !important;
     text-shadow: 0 1px 0 rgba(0,0,0,0.1);
     -webkit-transition: background-color .15s ease-in-out;
@@ -200,7 +200,7 @@ html { overflow-y: scroll; }
     width: 80px;
     margin: -60px auto 0 auto;
     border-radius: 5px;
-    background: #0BA1D8;
+    background: #032335;
     line-height: 80px;
     color: #fff;
 }
