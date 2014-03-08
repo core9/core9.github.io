@@ -89,7 +89,7 @@ html { overflow-y: scroll; }
 .tm-section .uk-heading-large { margin-bottom: 20px; }
 .tm-section .uk-text-large { margin-bottom: 60px; }
 
-.tm-section-color-1 { background: #2ba3d4 /*url("../images/bg_teaser.svg") 50% 50% no-repeat*/; }
+.tm-section-color-1 { background: #032335 /*url("../images/bg_teaser.svg") 50% 50% no-repeat*/; }
 
 /* Desktop and bigger */
 @media (max-width: 959px) {
@@ -98,7 +98,7 @@ html { overflow-y: scroll; }
 
 }
 
-.tm-section-color-2 { background: #3dc0f1; }
+.tm-section-color-2 { background: #4D6665; }
 
 .tm-section-colored,
 .tm-section-colored h1,
