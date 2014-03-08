@@ -31,6 +31,9 @@ html { overflow-y: scroll; }
 /* Layout
  ========================================================================== */
 
+#core9 {
+	font-size:21em;
+}
 
 .tm-background { background: #252525; }
 
@@ -115,6 +118,12 @@ html { overflow-y: scroll; }
     .tm-section-color-white .uk-grid-divider:not(:empty) > [class*='uk-width-medium-']:not(.uk-width-medium-1-1):nth-child(n+2) { border-left: 1px dashed #ddd; }
     .tm-section-color-2 .uk-grid-divider:not(:empty) > [class*='uk-width-medium-']:not(.uk-width-medium-1-1):nth-child(n+2) { border-left: 1px dashed rgba(255,255,255,0.4); }
 
+}
+
+@media (max-width: 767px){
+		#core9 {
+		font-size:8em;
+	}
 }
 
 /*
