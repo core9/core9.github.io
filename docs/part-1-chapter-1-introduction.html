@@ -14,5 +14,232 @@
 		functionality.
 	</p><p>
 		A dominant factor in the design of core9 was to create highly
-		decoupled code which would interact mainly throu interfaces.
-	</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="overview.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="overview.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="part-1-chapter-2-get-started.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Part&nbsp;I.&nbsp;Overview of Core9 Framework&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;2.&nbsp;Get Started</td></tr></table></div></body></html>
+		decoupled code which would interact mainly through interfaces.
+	</p><div class="section" title="1.1&nbsp;The Core"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d4e32"></a>1.1&nbsp;The Core</h2></div></div></div><p>
+			In essence the core is nomore than a registry.
+			These are its
+			boot steps :
+
+		</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+				When the core starts it scans all it's classpaths for the
+				plugin
+				annotations.
+			</li><li class="listitem">It puts those plugins in the registry.</li><li class="listitem">It than runs over all the plugins to handle the
+				dependencies.</li><li class="listitem">If a plugin is requested from the registry it gets wrapt
+				with a
+				proxy.
+			</li></ol></div></div><div class="section" title="1.2&nbsp;Boot Strategies"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d4e40"></a>1.2&nbsp;Boot Strategies</h2></div></div></div><p>
+			To work with the registery we introduced boot strategies.
+			What boot strategies allow you to do is to define a class that is run at
+			boot time and has accses to the plugin registry.
+		</p><p>
+			This can be very useful if you have plugins that need special
+			configuration before runtime.
+		</p><p>
+			A good example of this is the static handler plugin, by givin your
+			plugin the StaticProvider interface your plugin now becomes a
+			StaticProvider.
+
+			interface :
+		</p><pre class="programlisting">
+
+public interface YourWidget extends WidgetProvider, Core9Plugin, StaticProvider, PageModelProvider {
+
+}
+
+</pre><p>
+The StaticHandlerBootStrategyImpl can collect all static files provided through the staticProvider .getStaticFiles() and load them in a Static file handler.
+</p><p>
+StaticHandlerBootStrategyImpl : 
+</p><pre class="programlisting">
+
+@PluginImplementation
+public class StaticHandlerBootStrategyImpl extends CoreBootStrategy implements StaticHandlerBootStrategy {
+
+@InjectPlugin
+private StaticHandler handler;
+
+@Override
+public Integer getPriority() {
+	return 250;
+}
+
+@Override
+public void processPlugins() {
+	for(Plugin plugin : this.registry.getPlugins()) {
+		List&lt;Class&lt;?&gt;&gt; interfaces = ClassUtils.getAllInterfaces(plugin.getClass());
+		if(interfaces.contains(StaticProvider.class)) {
+			StaticProvider provider = (StaticProvider) plugin;
+				for(Map.Entry&lt;String, InputStream&gt; entry : provider.getStaticFiles().entrySet()) {
+					try {
+						handler.addStaticFile(entry.getKey(), entry.getValue());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
+
+}
+
+</pre><p>
+	It already shows that working in this way forces you to clearly define
+	your data and functional bounderies.
+</p></div><div class="section" title="1.3&nbsp;Hooks, Proxy Pattern and Invocation Handlers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d4e50"></a>1.3&nbsp;Hooks, Proxy Pattern and Invocation Handlers</h2></div></div></div><p>
+		By working with plugins and interfaces there will be times that
+		you want to overide or intercept data that gets passed thru the
+		methods of those interfaces.
+	</p><p>
+		For that we implemented the hooks mechanism.
+		We choose not to implement a full blown AOP solution as it is used very
+		infrequent.
+	</p><p>
+		To show the power of hooks just look at the code below.
+	</p><p>
+		Test plugin :
+	</p><pre class="programlisting">
+@PluginImplementation
+public class TestPluginImpl implements TestPlugin {
+
+	@Override
+	public void setHooks(List&lt;? extends Hook&gt; hooks) {
+
+	}
+
+	@Override
+	public String realTest(String body) {
+		return body;
+	}
+}
+
+</pre><p>
+	Test case:
+	</p><pre class="programlisting">
+@Test
+public void testPluginWithHook() {
+	TestPlugin plugin = (TestPlugin) registry.getPlugin(TestPluginImpl.class);
+	assertTrue(plugin.realTest("little succsess").equals("big success"));
+}
+
+</pre><p>
+		As you can see plugin.realTest("little succsess") should return "little succsess" however the plugin is wrapped in the proxy pattern and just before or after the method call we have the power to change the in or output.
+	</p><p>
+		The code below shows how this is implemented : 
+	</p><pre class="programlisting">
+
+@PluginImplementation
+public class TestPluginImpl2 implements TestPlugin2 {
+
+	@Override
+	public Collection&lt;Hook&gt; getHooks() {
+		Collection&lt;Hook&gt; hooks = new ArrayList&lt;Hook&gt;();
+		hooks.add(new Hook(io.core9.core.hooks.TestPlugin.class.getCanonicalName() + ":realTest:pre", 1) {
+
+	@Override
+	public Object[] execute(Object... args) {
+		args[0] = "false";
+		System.out.println(this);
+		return args;
+		}
+	});
+	hooks.add(new Hook(io.core9.core.hooks.TestPlugin.class.getCanonicalName() + ":realTest:pre", 2) {
+
+	@Override
+	public Object[] execute(Object... args) {
+		args[0] = "success";
+		return args;
+		}
+	});
+	return hooks;
+	}
+
+}
+
+</pre><p>
+		The line :
+	</p><pre class="programlisting">
+	
+hooks.add(new Hook(io.core9.core.hooks.TestPlugin.class.getCanonicalName() + ":realTest:pre", 2)
+	</pre><p>
+		will be replace with static constants generated at build time however for
+		now this is how you can intercept method calls.
+	</p><p>
+		Even if you don't have the source code of a library this mechanism allows
+		you to still change the inputs and outputs on the fly.
+	</p><p>
+		Some use cases that come to mind is logging, profiling or authorization.
+	</p></div><div class="section" title="1.4&nbsp;Marker Interfaces"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d4e67"></a>1.4&nbsp;Marker Interfaces</h2></div></div></div><p>		
+		&#8220;If you don&#8217;t want to define a type, don&#8217;t use an interface.&#8221;
+- Joshua Bloch
+
+</p><p>
+We make extensive use of interfaces for different reasons for example:
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+		Types are a major assist in large code bases and let's you refactor with
+		confidence.
+	</li><li class="listitem">
+		Reflection is very sub optimal for performance as well for readability and
+		tooling.
+	</li><li class="listitem">
+		Before using an interface you have to know what your doing otherwise you get
+		burned. We would like to provide code that others can trust. That is
+		if we implement some functionality and we change it you have to be
+		able to find out in a sec with those little red flags.
+	</li><li class="listitem">
+		Also interfaces should not change to often especialy much used interfaces
+		this make's coding less impulsive and more thoughtful
+	</li><li class="listitem">
+		We have thought about marker annotations and we might use them more in
+		the future.
+	</li></ol></div><p>
+For now this kind of code you can find very often in core9 plugins :
+</p><pre class="programlisting">
+
+@Override
+public void bootstrap() {
+		strategies = new TreeMap&lt;Integer, ArrayList&lt;BootStrategy&gt;&gt;();
+		for(Plugin plugin: registry.getPlugins()) {
+			List&lt;Class&lt;?&gt;&gt; interfaces = ClassUtils.getAllInterfaces(plugin.getClass());
+			if(interfaces.contains(BootStrategy.class)) {
+				log.info("Found BootStrategy in plugin: " + plugin.getClass().getName());
+				BootStrategy strategy = (BootStrategy) plugin;
+				Integer priority = strategy.getPriority();
+				if(!strategies.containsKey(priority)) {
+					strategies.put(priority, new ArrayList&lt;BootStrategy&gt;());
+				}else{
+					log.info("Priority confict with plugin : " + plugin.getClass().getName());
+					log.info("Priority taken by plugin : " + strategies.get(priority).getClass().getName());
+				}
+				strategies.get(priority).add(strategy);
+			}
+	}
+}
+</pre><p>
+In our opinion this code is very clear and precise and hard to get wrong.  
+
+As you saw in the chapter about gradle some of the goals of core9 is high maintainability we try to achieve this by taking to heart the lessons of some of the most influential people in the short history of programming.
+</p><p>
+So here are some of the principles we like to adhere to :
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+ SOLID
+</li><li class="listitem">
+ Design by contract
+</li><li class="listitem">
+ Command query separation
+</li><li class="listitem">
+ Pushing problems to the architectural layer
+</li></ol></div><p>
+The unix philosophy :
+</p><p>
+The Unix philosophy lies at the core of not only the original UNIX as developed by Ken Thompson at Bell Labs from 1969 but also of its numerous direct descendants and clones, including Solaris, the BSDs1 and Linux. It has made them, collectively referred to as Unix-like operating systems, into what are widely considered to be the best2 operating systems to have been developed to date, despite the fact that they are by far the oldest operating systems in widespread use, and it has been a major factor in the rapid growth and increasing success of Linux.
+</p><p>
+There is no single, standardized statement of the philosophy. But if it had to be described with only a single word, that word would be modularity, which refers to a system that is composed of components (i.e., modules) that can be fitted together or arranged in a variety of ways.
+</p><p>
+Modularity is common in nature, and its application to man-made products (both goods and services) has been a key factor in the development and advance of industrial societies. Yet, it was relatively little used for computer software prior to the development of UNIX, and even today its great benefits fail to be fully exploited by other operating systems, most notably the Microsoft Windows systems.
+</p><p>
+A slightly longer, and more conventional, statement of the Unix philosophy, but one which says essentially the same thing, would be: Design programs to do only a single thing, but to do it well, and to work together well with other programs3.
+
+</p><p>
+Drawbacks if you want to work on all modules at the same time!  :-)
+		</p></div><div class="section" title="1.5&nbsp;Provider Pattern"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d4e92"></a>1.5&nbsp;Provider Pattern</h2></div></div></div></div><div class="section" title="1.6&nbsp;Dependency Injection"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d4e94"></a>1.6&nbsp;Dependency Injection</h2></div></div></div></div><div class="section" title="1.7&nbsp;Programming to an Interface"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d4e96"></a>1.7&nbsp;Programming to an Interface</h2></div></div></div></div><div class="section" title="1.8&nbsp;Loose Coupeling"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d4e98"></a>1.8&nbsp;Loose Coupeling</h2></div></div></div></div><div class="section" title="1.9&nbsp;Clean Api's and Testable Implementations"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d4e100"></a>1.9&nbsp;Clean Api's and Testable Implementations</h2></div></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="overview.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="overview.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="part-1-chapter-2-get-started.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Part&nbsp;I.&nbsp;Overview of Core9 Framework&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;2.&nbsp;Get Started</td></tr></table></div></body></html>
