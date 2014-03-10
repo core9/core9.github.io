@@ -70,9 +70,10 @@ sourceSets.all { set ->
 dependencies {
 
 	coreCompile 'io.core9:core-api:+'
-	coreCompile 'io.core9:core-impl:+'
+
 
 	testCompile 'junit:junit:4.11'
+	testCompile 'io.core9:core-impl:+'
 		
 	testCompile sourceSets.api.output
 	testCompile sourceSets.impl.output
