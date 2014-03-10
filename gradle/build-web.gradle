@@ -1,4 +1,5 @@
-apply from: 'http://www.core9.tv/gradle/project.gradle'
+
+apply from: 'https://raw2.github.com/core9/core9.github.io/master/gradle/project.gradle'
 
 /**
  * Build a web project
