@@ -171,8 +171,8 @@ class ProjectVersion {
 	String build
 	
 	ProjectVersion(String version, String build) {
-		this.version = version
-		this.build = build
+		this.version = System.getenv()['TRAVIS_BUILD_ID'] // ..??
+		this.build = System.getenv()['TRAVIS_BUILD_NUMBER'] 
 	}
 	
 	@Override
