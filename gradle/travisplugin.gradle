@@ -1,0 +1,190 @@
+//defaultTasks 'clean', 'test', 'build', ['sonar-runner', 'publishToMavenLocal']
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'sonar-runner'
+apply plugin: 'maven-publish'
+
+ext.buildTimestamp = new Date().format("yyyy-MM-dd HH:mm:ss")
+version = new ProjectVersion(projectVersion, System.env.BUILD_NUMBER)
+group = projectGroup
+
+jar.enabled = false
+
+configurations.all {
+	// check for updates every build
+	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+/**
+ * Source sets
+ * impl and api sources
+ */
+sourceSets {
+	api
+	impl
+}
+
+/**
+ * Configurations
+ * coreCompile are libraries available from core (other plugins), that don't need to be exported in to a distribution
+ */
+configurations {
+	coreCompile
+	apiCompile.extendsFrom compile
+	implCompile.extendsFrom compile
+}
+/**
+ * Export the coreCompile libs for eclipse
+ */
+eclipse.classpath.plusConfigurations += configurations.coreCompile
+eclipse.classpath.plusConfigurations += configurations.implCompile
+eclipse.classpath.plusConfigurations += configurations.apiCompile
+
+sourceSets.impl.compileClasspath += sourceSets.api.runtimeClasspath
+
+sourceSets.all { set ->
+	if(set.name == "main") return
+	def jarTask = task("${set.name}Jar", type: Jar) {
+		baseName = baseName + "-$set.name"
+		from set.output
+	}
+	artifacts { archives jarTask }
+	
+	set.compileClasspath += configurations.coreCompile
+	set.runtimeClasspath += configurations.coreCompile
+	
+	def docsTask = task("${set.name}Docs", type: Javadoc) {
+		source = set.allJava
+		classpath = set.runtimeClasspath
+		destinationDir = reporting.file("${set.name}-docs")
+	}
+	
+	set.java.srcDirs.each { it.mkdirs() }
+	set.resources.srcDirs.each { it.mkdirs() }
+}
+
+/**
+ * Maven and dependency resolving
+ */
+
+dependencies {
+
+	coreCompile 'io.core9:core-api:+'
+
+
+	testCompile 'junit:junit:4.11'
+	testCompile 'io.core9:core-impl:+'
+		
+	testCompile sourceSets.api.output
+	testCompile sourceSets.impl.output
+
+}
+
+sonarRunner {
+	sonarProperties {
+		property "sonar.host.url", "http://build.core9.io:9000"
+		property "sonar.jdbc.url", "jdbc:mysql://build.core9.io/sonar"
+		property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+		property "sonar.jdbc.username", sonarUsername
+		property "sonar.jdbc.password", sonarPassword
+		
+		properties["sonar.sources"] = sourceSets.api.allSource.srcDirs
+		properties["sonar.sources"] += sourceSets.impl.allSource.srcDirs
+	}
+}
+
+publishing {
+	publications {
+		api(MavenPublication) {
+			artifactId = project.name + '-api'
+			artifact apiJar
+			pom.withXml {
+				def deps = asNode().appendNode('dependencies')
+				['compile','coreCompile','apiCompile'].each { conf ->
+					configurations[conf].dependencies.each { s ->
+					def dep = deps.appendNode('dependency')
+						dep.appendNode('groupId', s.group.trim())
+						dep.appendNode('artifactId', s.name.trim())
+						dep.appendNode('version', s.version.trim())
+					}
+				}
+			}
+		}
+		impl(MavenPublication) {
+			artifactId = project.name + '-impl'
+			artifact implJar
+			pom.withXml {
+				def deps = asNode().appendNode('dependencies')
+				['compile','coreCompile','implCompile'].each { conf -> 
+					configurations[conf].dependencies.each { s ->
+					def dep = deps.appendNode('dependency')
+						dep.appendNode('groupId', s.group.trim())
+						dep.appendNode('artifactId', s.name.trim())
+						dep.appendNode('version', s.version.trim())
+					}
+				}
+				['testCompile'].each { conf -> 
+					configurations[conf].dependencies.each { s ->
+					if(s.group != null) {
+						def dep = deps.appendNode('dependency')
+							dep.appendNode('groupId', s.group.trim())
+							dep.appendNode('artifactId', s.name.trim())
+							dep.appendNode('version', s.version.trim())
+							dep.appendNode('scope', 'test')
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	repositories {
+		maven {
+			url "http://build.core9.io:8081/artifactory/libs-release-local"
+			credentials {
+				username System.getenv()['artifactoryUser'] 
+				password System.getenv()['artifactoryPassword']
+			}
+		}
+	}
+}
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+
+	maven {
+		credentials {
+				username System.getenv()['artifactoryUser'] 
+				password System.getenv()['artifactoryPassword']
+		}
+		url "http://build.core9.io:8081/artifactory/libs-release"
+	}
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '1.10'
+}
+
+class ProjectVersion {
+	String version
+	String build
+	
+	ProjectVersion(String version, String build) {
+		this.version = version
+		this.build = build
+	}
+	
+	@Override
+	String toString() {
+		String fullVersion = "$version"
+		
+		if(build) {
+			fullVersion += ".$build"
+		} else {
+			fullVersion += "-SNAPSHOT"
+		}
+		fullVersion
+	}
+}
+
