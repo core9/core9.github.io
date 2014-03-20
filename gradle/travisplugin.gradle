@@ -140,7 +140,7 @@ publishing {
 	
 	repositories {
 		maven {
-			url "http://build.core9.io:8081/artifactory/libs-snapshot-local"
+			url "http://build.core9.io:8081/artifactory/libs-release-local"
 			credentials {
 				username System.getenv()['artifactoryUser'] 
 				password System.getenv()['artifactoryPassword']
@@ -171,7 +171,7 @@ class ProjectVersion {
 	String build
 	
 	ProjectVersion(String version, String build) {
-		this.version = version //System.getenv()['TRAVIS_BUILD_ID'] // ..??
+		this.version = version//System.getenv()['TRAVIS_BUILD_ID'] // ..??
 		this.build = System.getenv()['TRAVIS_BUILD_NUMBER'] 
 	}
 	
