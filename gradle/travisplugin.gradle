@@ -140,7 +140,7 @@ publishing {
 	
 	repositories {
 		maven {
-			url "http://build.core9.io:8081/artifactory/libs-release-local"
+			url "http://build.core9.io:8081/artifactory/libs-snapshot"
 			credentials {
 				username System.getenv()['artifactoryUser'] 
 				password System.getenv()['artifactoryPassword']
