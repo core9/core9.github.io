@@ -99,7 +99,7 @@ def shouldPrune = { task ->
 
 gradle.taskGraph.whenReady { taskGraph ->
     taskGraph.getAllTasks().each { task ->
-        p.enabled = shouldPrune(task)
+        task.enabled = shouldPrune(task)
     }
 }
 
