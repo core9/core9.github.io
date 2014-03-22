@@ -97,26 +97,9 @@ def shouldPrune = { task ->
 	}
 }
 
-def recursivelyApplyToTaskDependencies(Task parent, Closure closure) {
-    closure(parent)
-
-    parent.dependsOn.findAll { dependency ->
-        dependency instanceof Task
-    }.each { task ->
-        recursivelyApplyToTaskDependencies(task, closure)
-    }
-}
-
-
 gradle.taskGraph.whenReady { taskGraph ->
     taskGraph.getAllTasks().each { task ->
-        def pruned = shouldPrune(task)
-
-        if (pruned) {
-            recursivelyApplyToTaskDependencies(task) { p ->
-                p.enabled = false
-            }
-        }
+        p.enabled = shouldPrune(task)
     }
 }
 
