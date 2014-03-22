@@ -36,6 +36,8 @@ dependencies {
  * Export the coreCompile libs for eclipse
  */
 eclipse.classpath.plusConfigurations += configurations.coreCompile
+eclipse.classpath.plusConfigurations += configurations.implCompile
+eclipse.classpath.plusConfigurations += configurations.apiCompile
 
 sourceSets.impl.compileClasspath += sourceSets.api.runtimeClasspath
 
