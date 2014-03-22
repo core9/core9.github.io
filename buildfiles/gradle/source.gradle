@@ -65,7 +65,7 @@ task implSourceJar(type: Jar) {
 	from sourceSets.impl.allJava
 }
 
-task implJar(type:Jar) {
+task implJar(type: Jar) {
 	from sourceSets.api.output
 	from sourceSets.impl.output
 }
