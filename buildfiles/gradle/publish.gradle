@@ -90,6 +90,9 @@ bintray {
  * If branch is master, publish to bintray, else publish to artifactory
  */
 def shouldBeEnabled = { task ->
+	if(task.name == 'jar') {
+		false
+	}
 	if(System.env.TRAVIS_BRANCH == 'master') {
 		if(task.name == 'publishApiPublicationToMavenRepository' || 
 		   task.name == 'publishImplPublicationToMavenRepository') {

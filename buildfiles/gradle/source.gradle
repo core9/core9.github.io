@@ -14,11 +14,6 @@ sourceSets {
 }
 
 /**
- * Disable normal jar (only uses src/main/java)
- */
-jar.enabled = false
-
-/**
  * Configurations
  * coreCompile are libraries available from core (other plugins), that don't need to be exported in to a distribution
  */
