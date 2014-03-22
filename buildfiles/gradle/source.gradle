@@ -20,7 +20,8 @@ sourceSets {
 configurations {
 	coreCompile
 	apiCompile.extendsFrom compile
-	implCompile.extendsFrom compile
+	implCompile.extendsFrom apiCompile
+	testCompile.extendsFrom implCompile
 }
 
 /**
@@ -41,6 +42,7 @@ eclipse.classpath.plusConfigurations += configurations.apiCompile
 
 sourceSets.impl.compileClasspath += sourceSets.api.runtimeClasspath
 
+
 sourceSets.all { set ->
 	if(set.name == "main") return
 	def docsTask = task("${set.name}Docs", type: Javadoc) {
@@ -48,6 +50,9 @@ sourceSets.all { set ->
 		classpath = set.runtimeClasspath
 		destinationDir = reporting.file("${set.name}-docs")
 	}
+	set.compileClasspath += configurations.coreCompile
+	set.runtimeClasspath += configurations.coreCompile
+
 	set.java.srcDirs.each { it.mkdirs() }
 	set.resources.srcDirs.each { it.mkdirs() }
 }
