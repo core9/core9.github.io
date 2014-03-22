@@ -89,17 +89,28 @@ bintray {
 /**
  * If branch is master, publish to bintray, else publish to artifactory
  */
-def shouldPrune = { task ->
-	if(task.name == 'publish' && System.env.TRAVIS_BRANCH == 'master') {
-		true;
-	} else if(task.name == 'publishBintray' && System.env.TRAVIS_BRANCH != 'master') {
-		true;
+def shouldBeEnabled = { task ->
+	if(System.env.TRAVIS_BRANCH == 'master') {
+		if(task.name == 'publishApiPublicationToMavenRepository' || 
+		   task.name == 'publishImplPublicationToMavenRepository') {
+			false
+		} else {
+			true
+		}
+	} else {
+		if(task.name == 'publish' || 
+		   task.name == 'publishBintray' || 
+		   task.name == 'bintrayUpload') {
+			false
+		} else {
+			true
+		}
 	}
 }
 
 gradle.taskGraph.whenReady { taskGraph ->
     taskGraph.getAllTasks().each { task ->
-        task.enabled = shouldPrune(task)
+    	task.enabled = shouldBeEnabled(task)
     }
 }
 
