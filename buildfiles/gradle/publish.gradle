@@ -91,22 +91,24 @@ bintray {
  */
 def shouldBeEnabled = { task ->
 	if(task.name == 'jar') {
+		// Disable normal jar (empties the impl jar with main (which is null))
 		false
-	}
-	if(System.env.TRAVIS_BRANCH == 'master') {
-		if(task.name == 'publishApiPublicationToMavenRepository' || 
-		   task.name == 'publishImplPublicationToMavenRepository') {
-			false
-		} else {
-			true
-		}
 	} else {
-		if(task.name == 'publish' || 
-		   task.name == 'publishBintray' || 
-		   task.name == 'bintrayUpload') {
-			false
+		if(System.env.TRAVIS_BRANCH == 'master') {
+			if(task.name == 'publishApiPublicationToMavenRepository' || 
+			   task.name == 'publishImplPublicationToMavenRepository') {
+				false
+			} else {
+				true
+			}
 		} else {
-			true
+			if(task.name == 'publish' || 
+			   task.name == 'publishBintray' || 
+			   task.name == 'bintrayUpload') {
+				false
+			} else {
+				true
+			}
 		}
 	}
 }
