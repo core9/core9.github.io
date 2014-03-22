@@ -1,0 +1,149 @@
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'rest'
+apply plugin: 'bintray'
+
+version = new ProjectVersion(projectVersion, System.env.TRAVIS_BRANCH, System.env.TRAVIS_BUILD_NUMBER)
+
+/**
+ * Create maven POMs. Can be removed when maven/maven-publish works better.
+ */
+publishing {
+	publications {
+		api(MavenPublication) {
+			artifactId = project.name + '-api'
+			artifact apiJar
+
+			artifact apiSourceJar {
+				classifier "sources"
+			}
+			pom.withXml {
+				def deps = asNode().appendNode('dependencies')
+				['compile','coreCompile','apiCompile'].each { conf ->
+					configurations[conf].dependencies.each { s ->
+					def dep = deps.appendNode('dependency')
+						dep.appendNode('groupId', s.group.trim())
+						dep.appendNode('artifactId', s.name.trim())
+						dep.appendNode('version', s.version.trim())
+					}
+				}
+			}
+		}
+			
+		impl(MavenPublication) {
+			artifact implJar
+
+			artifact implSourceJar {
+				classifier "sources"
+			}
+			pom.withXml {
+				def deps = asNode().appendNode('dependencies')
+				['compile','coreCompile','implCompile'].each { conf -> 
+					configurations[conf].dependencies.each { s ->
+					def dep = deps.appendNode('dependency')
+						dep.appendNode('groupId', s.group.trim())
+						dep.appendNode('artifactId', s.name.trim())
+						dep.appendNode('version', s.version.trim())
+					}
+				}
+				['testCompile'].each { conf -> 
+					configurations[conf].dependencies.each { s ->
+					if(s.group != null) {
+						def dep = deps.appendNode('dependency')
+							dep.appendNode('groupId', s.group.trim())
+							dep.appendNode('artifactId', s.name.trim())
+							dep.appendNode('version', s.version.trim())
+							dep.appendNode('scope', 'test')
+						}
+					}
+				}
+			}
+		}
+	}
+	repositories {
+		maven {
+			url "http://oss.jfrog.org/artifactory/oss-snapshot-local"
+			credentials {
+				username System.env.BINTRAY_USER
+				password System.env.BINTRAY_KEY
+			}
+		}
+	}
+}
+
+bintray {
+	user = System.env.BINTRAY_USER
+	key = System.env.BINTRAY_KEY
+	publications = ['api', 'impl']
+	pkg {
+		repo = 'core9'
+		userOrg = 'core9'
+		desc = 'The Core9 Core application'
+		licenses = ['Apache-2.0']
+		labels = ['java', 'web', 'modular', 'framework']
+	}
+	pkg.name = project.name
+}
+
+
+/**
+ * If branch is master, publish to bintray, else publish to artifactory
+ */
+def shouldPrune = { task ->
+	if(task.name == 'publish' && System.env.TRAVIS_BRANCH == 'master') {
+		true;
+	} else if(task.name == 'publishBintray' && System.env.TRAVIS_BRANCH != 'master') {
+		true;
+	}
+}
+
+def recursivelyApplyToTaskDependencies(Task parent, Closure closure) {
+    closure(parent)
+
+    parent.dependsOn.findAll { dependency ->
+        dependency instanceof Task
+    }.each { task ->
+        recursivelyApplyToTaskDependencies(task, closure)
+    }
+}
+
+
+gradle.taskGraph.whenReady { taskGraph ->
+    taskGraph.getAllTasks().each { task ->
+        def pruned = shouldPrune(task)
+
+        if (pruned) {
+            recursivelyApplyToTaskDependencies(task) { p ->
+                p.enabled = false
+            }
+        }
+    }
+}
+
+
+/**
+ * Define the version (depends on branch and build number)
+ */
+class ProjectVersion {
+	String version
+	String build
+	String branch
+	
+	ProjectVersion(String version, String branch, String build) {
+		this.version = version
+		this.branch = branch
+		this.build = build
+	}
+	
+	@Override
+	String toString() {
+		String fullVersion = "$version"
+		
+		if(build && branch.equals("master")) {
+			fullVersion += ".$build"
+		} else {
+			fullVersion += "-SNAPSHOT"
+		}
+		fullVersion
+	}
+}

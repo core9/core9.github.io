@@ -1,0 +1,15 @@
+/**
+ * Publish to Jcenter (Bintray)
+ */
+project.buildscript {
+	repositories {
+		jcenter()
+        maven { 
+        	url 'http://dl.bintray.com/content/noamt/gradle-plugins' 
+       	}
+	}
+	dependencies {
+		classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.3'
+        classpath 'org._10ne.gradle:rest-gradle-plugin:0.1.1'
+	}
+}

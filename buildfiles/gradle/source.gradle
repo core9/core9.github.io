@@ -1,0 +1,86 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+ext.buildTimestamp = new Date().format("yyyy-MM-dd HH:mm:ss")
+group = projectGroup
+
+/**
+ * Source sets
+ * impl and api sources
+ */
+sourceSets {
+	api
+	impl
+}
+
+/**
+ * Configurations
+ * coreCompile are libraries available from core (other plugins), that don't need to be exported in to a distribution
+ */
+configurations {
+	coreCompile
+	apiCompile.extendsFrom compile
+	implCompile.extendsFrom compile
+}
+
+/**
+ * Maven and dependency resolving
+ */
+dependencies {
+	testCompile 'junit:junit:4.11'
+	testCompile sourceSets.api.output
+	testCompile sourceSets.impl.output
+}
+
+/**
+ * Export the coreCompile libs for eclipse
+ */
+eclipse.classpath.plusConfigurations += configurations.coreCompile
+
+sourceSets.impl.compileClasspath += sourceSets.api.runtimeClasspath
+
+sourceSets.all { set ->
+	if(set.name == "main") return
+	def docsTask = task("${set.name}Docs", type: Javadoc) {
+		source = set.allJava
+		classpath = set.runtimeClasspath
+		destinationDir = reporting.file("${set.name}-docs")
+	}
+	set.java.srcDirs.each { it.mkdirs() }
+	set.resources.srcDirs.each { it.mkdirs() }
+}
+
+task apiSourceJar(type: Jar) {
+	baseName = baseName + "-api"
+	from sourceSets.api.allJava
+}
+
+task apiJar(type: Jar) {
+	baseName = baseName + "-api"
+	from sourceSets.api.output
+}
+
+task implSourceJar(type: Jar) {
+	from sourceSets.api.allJava
+	from sourceSets.impl.allJava
+}
+
+task implJar(type:Jar) {
+	from sourceSets.api.output
+	from sourceSets.impl.output
+}
+
+artifacts {
+	archives apiSourceJar
+	archives apiJar
+	archives implSourceJar
+	archives implJar
+}
+
+repositories {
+	jcenter()
+
+	maven {
+		url "http://oss.jfrog.org/artifactory/oss-snapshot-local"
+	}
+}
