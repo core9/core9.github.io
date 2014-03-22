@@ -78,7 +78,7 @@ bintray {
 	pkg {
 		repo = 'core9'
 		userOrg = 'core9'
-		desc = 'The Core9 Core application'
+		desc = 'Core9 Framework Application (www.core9.io) '
 		licenses = ['Apache-2.0']
 		labels = ['java', 'web', 'modular', 'framework']
 	}
