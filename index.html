@@ -14,6 +14,34 @@
 <link rel="stylesheet" href="UIkit_files/docs.css">
 <script src="http://getuikit.com/dist/js/uikit.min.js"></script>
 <script src="UIkit_files/docs.js"></script>
+<script>
+	
+	var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-49296353-1']);
+	  _gaq.push(['_trackPageview']);
+	
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49296353-1', 'core9.io');
+  ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+function trackOutboundLink(link, category, action) { 
+
+try { 
+_gaq.push(['_trackEvent', category , action]); 
+} catch(err){}
+
+setTimeout(function() {
+document.location.href = link.href;
+}, 100);
+}
+</script>
 </head>
 
 <body class="tm-background">
@@ -72,11 +100,11 @@
 
 			<a
 				href="https://github.com/core9/core/archive/master.zip"
-				class="uk-button tm-button-download" data-uikit-download="">Download CORE</a>
+				class="uk-button tm-button-download" data-uikit-download="" onClick="trackOutboundLink(this, 'Download link', 'core'); return false;">Download CORE</a>
 				&nbsp;&nbsp;&nbsp;
 							<a
 				href="https://github.com/core9/core9-platform/archive/master.zip"
-				class="uk-button tm-button-download" data-uikit-download="">Download Platform</a>
+				class="uk-button tm-button-download" data-uikit-download="" onClick="trackOutboundLink(this, 'Download link', 'platform'); return false;">Download Platform</a>
 
 			<ul class="tm-subnav uk-subnav">
 				<li><a href="https://github.com/core9">GitHub</a></li>
@@ -449,15 +477,7 @@
 
 	<div class="uk-tooltip"></div>
 	
-	<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-49296353-1', 'core9.io');
-  ga('send', 'pageview');
 
-</script>
 </body>
 </html>
