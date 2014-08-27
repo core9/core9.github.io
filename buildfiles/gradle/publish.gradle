@@ -38,7 +38,7 @@ publishing {
 			}
 			pom.withXml {
 				def deps = asNode().appendNode('dependencies')
-				['compile','coreCompile','implCompile'].each { conf -> 
+				['compile','coreCompile','apiCompile','implCompile'].each { conf -> 
 					configurations[conf].dependencies.each { s ->
 					def dep = deps.appendNode('dependency')
 						dep.appendNode('groupId', s.group.trim())
