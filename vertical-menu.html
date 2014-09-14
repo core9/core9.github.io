@@ -215,10 +215,12 @@ transition:1s;
 .ticker{height:20px;}
 .ticker, .spacer {border: 0px;}
 
-
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 600px) {
+ .ticker { height:40px; }
   .metroMenu div.panels {left: 100px;}
-  
+}
+@media only screen and (max-width: 768px) {
+  .metroMenu div.panels {left: 768px;}
 }
 @media only screen and (min-width: 768px) {
   .metroMenu div.panels {left: 193px;}
@@ -263,7 +265,7 @@ transition:1s;
 
     <div class="block-group">
         <div class="ticker block box"><span id="welcome-header">Welkom in de Tirolershop, de plaats voor alle feestartikelen voor de Oktoberfesten!</span></div>
-        <div class="spacer block box">spacer</div>
+        <div class="spacer block box">spacer<br><a href="vertical-menu.html">reload</a></div>
         <div class="header1 block box">Header1</div>
         <div class="header2 block box">Header2</div>
         <div class="header3 block box">Header3</div>
@@ -292,7 +294,6 @@ transition:1s;
   </ul>
   <div class="panels">
       <div class="contentPane">
-      <a href="vertical-menu.html">reload</a>
         <h1>The MetroMenu from CSS play </h1>
         <h2>Take control of your filing system</h2>
         <h2>These panels can hold any information you want, from plain text, to photo galleries and forms.</h2>
@@ -397,7 +398,7 @@ transition:1s;
   </main>
   <footer> </footer>
 
-  <script async src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.2.0/respond.min.js"></script>
+  <script async src="js/respond.min.js"></script>
   <script async  src="js/enquire.min.js"></script>
   <script async  src="js/main.js"></script>
 </body>
