@@ -35,7 +35,7 @@ var Core9 = {
 	},
 
 	setStage : function() {
-		Core9._setBodyBackground();
+		//Core9._setBodyBackground();
 		Core9._resizeCenter();
 	},
 
