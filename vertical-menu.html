@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en"  class="load">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<title>Base theme</title>
+<style>
+*{margin:0;padding:0}body,html{height:100%;background:#fff}header{height:180px;background:#fff}main{min-height:100%;margin-top:-180px;margin-bottom:-105px;display:block}main:after{content:"";display:block}footer,main:after{height:105px}footer{background:#69b003}.center{width:960px;position:relative;margin: 0 auto;top:0px;}
+body{ 
+opacity:0;
+transition: opacity 0.5s;
+ -webkit-transition: opacity 0.5s ease-in;
+       -moz-transition: opacity 0.5s ease-in;
+        -ms-transition: opacity 0.5s ease-in;
+         -o-transition: opacity 0.5s ease-in;
+            transition: opacity 0.5s ease-in;
+}
+</style>
+<style>
+.center {
+  overflow: hidden;
+  width:100%;
+  background-color: #f2f2f2;
+  -webkit-box-shadow: 0px 9px 18px -7px #323232;
+  -moz-box-shadow: 0px 9px 18px -7px #323232;
+  box-shadow: 0px 30px 20px -14px #323232; /*experiment*/
+  margin-bottom: -100px;
+}
+</style>
+<style>
+.block-group,.block,.block-group:after,.block:after,.block-group:before,.block:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+.block-group{*zoom:1}
+.block-group:before,.block-group:after{display:table;content:"";line-height:0}
+.block-group:after{clear:both}
+.block-group{list-style-type:none;padding:0;margin:0}
+.block-group>.block-group{clear:none;float:left;margin:0 !important}
+.block{float:left;width:100%}
+.box {width: 100%;margin: 0px;padding: 0px;}
+</style>
+<style>
+/* Pocket grid 
+   Smartphone version
+   Nothing to do: blocks are stacked by default. */
+   /* custom stuff */
+.box {
+  background-color: #EEE;/*#E0E9FF; /* Old browsers */
+  font-size: .8em;
+  color: #777;
+  border: solid 1px #DDD;
+  text-align: center;
+  padding:0px;
+}
+</style>
+
+<style>
+
+/* ================================================================ 
+This copyright notice must be kept untouched in the stylesheet at 
+all times.
+
+The original version of this stylesheet and the associated (x)html
+is available at http://www.cssplay.co.uk/menus/cssplay-metromenu.html
+Copyright (c) Stu Nicholls. All rights reserved.
+This stylesheet and the associated (x)html may be modified in any 
+way to fit your requirements.
+=================================================================== */
+.container {width:100%; height:313px; margin:0; -webkit-tap-highlight-color: rgba(0,0,0,0); position:relative; z-index:100;}
+.metroMenu {width:100%; height:400px; position:relative;}
+.metroMenu ul.options {padding:0; margin:0; list-style:none; width:100%; height:400px; overflow:hidden;}
+.metroMenu ul.options li {float:left; margin:0}
+.metroMenu input.metro {display:none; position:absolute;}
+.metroMenu label.metro,
+.metroMenu label.metro + label {display:block; position:relative; width:100%; height:100%; cursor:pointer;}
+.metroMenu .s11 {width:90px; height:90px;}
+.metroMenu .s21 {width:100%; height:39px;}
+.metroMenu .s22 {width:190px; height:190px;}
+
+.metroMenu label.metro span {display:block; width:100%; position:absolute; left:0; bottom: 9px; font: 400 15px/25px 'PT Sans', arial, sans-serif; color:#fff; text-indent:10px;}
+
+
+.metroMenu ul.options li label.close {display:none; background:rgba(255,255,255,0.2) url(images/selected.png) no-repeat right top; margin-top:-39px;}
+.metroMenu ul.options li.s22 label.close {margin-top:-190px;}
+
+.metroMenu ul.options li:nth-of-type(1) {background:#38e  no-repeat center 20px;}
+.metroMenu ul.options li:nth-of-type(2) {background:#a05  no-repeat center -10px;}
+.metroMenu ul.options li:nth-of-type(3) {background:#837  no-repeat center -10px;}
+.metroMenu ul.options li:nth-of-type(4) {background:#f80  no-repeat center -10px;}
+.metroMenu ul.options li:nth-of-type(5) {background:#e10  no-repeat center -10px;}
+.metroMenu ul.options li:nth-of-type(6) {background:#164  no-repeat center -10px;}
+.metroMenu ul.options li:nth-of-type(7) {background:#222  no-repeat center -10px;}
+.metroMenu ul.options li:nth-of-type(8) {background:#990  no-repeat center -10px;}
+
+.metroMenu #mm1:not(:checked) ~ ul.options li:nth-of-type(1):hover label:first-child:before,
+.metroMenu #mm2:not(:checked) ~ ul.options li:nth-of-type(2):hover label:first-child:before,
+.metroMenu #mm3:not(:checked) ~ ul.options li:nth-of-type(3):hover label:first-child:before,
+.metroMenu #mm4:not(:checked) ~ ul.options li:nth-of-type(4):hover label:first-child:before,
+.metroMenu #mm5:not(:checked) ~ ul.options li:nth-of-type(5):hover label:first-child:before,
+.metroMenu #mm6:not(:checked) ~ ul.options li:nth-of-type(6):hover label:first-child:before,
+.metroMenu #mm7:not(:checked) ~ ul.options li:nth-of-type(7):hover label:first-child:before,
+.metroMenu #mm8:not(:checked) ~ ul.options li:nth-of-type(8):hover label:first-child:before {content:""; display:block; width:100%; height:100%; background:rgba(255,255,255,0.2); position:absolute; left:0; top:0;}
+
+.metroMenu #mm1:checked ~ ul.options li:nth-of-type(1) label.close,
+.metroMenu #mm2:checked ~ ul.options li:nth-of-type(2) label.close,
+.metroMenu #mm3:checked ~ ul.options li:nth-of-type(3) label.close,
+.metroMenu #mm4:checked ~ ul.options li:nth-of-type(4) label.close,
+.metroMenu #mm5:checked ~ ul.options li:nth-of-type(5) label.close,
+.metroMenu #mm6:checked ~ ul.options li:nth-of-type(6) label.close,
+.metroMenu #mm7:checked ~ ul.options li:nth-of-type(7) label.close,
+.metroMenu #mm8:checked ~ ul.options li:nth-of-type(8) label.close {display:block;}
+
+.metroMenu div.panels {width:574px; height:312px; background:#fff; position:absolute; left:240px; top:0px; background:#eee; overflow:hidden; display:none;}
+.metroMenu div.panels div.contentPane {width:560px; height:350px; padding:20px; margin-top:0; overflow-x:auto;
+-webkit-transition:0.5s;
+-o-transition:0.5s;
+transition:0.5s;
+}
+
+/* Chrome/Safari scroll bar styling */
+.metroMenu div.panels div::-webkit-scrollbar {
+width: 25px;
+background: #f80;
+}
+.metroMenu div.panels div::-webkit-scrollbar-thumb {
+background: #056;
+}
+
+/* IE8+ scroll bar styles */
+.metroMenu div.panels div.contentPane {
+-ms-scrollbar-base-color:#f80; 
+-ms-scrollbar-3dlight-color:#056;
+-ms-scrollbar-arrow-color:#056;
+-ms-scrollbar-darkshadow-color:#056;
+-ms-scrollbar-face-color:#056;
+-ms-scrollbar-highlight-color:#056;
+-ms-scrollbar-shadow-color:#056;
+-ms-scrollbar-track-color:#f80;
+/* IE10 Touch screen scrolling */
+-ms-scroll-snap-points-y:snapInterval(0px, 10px);
+-ms-scroll-snap-type:mandatory;
+-ms-scroll-chaining:none;
+}
+
+.metroMenu .panels div:first-child {margin-top:390px;}
+
+.metroMenu input:checked ~ div.panels {display:block;}
+.metroMenu #mmClose:checked ~ div.panels {display:none;}
+
+#mm1:checked ~ .panels div.contentPane:first-child {margin-top:0;}
+#mm2:checked ~ .panels div.contentPane:first-child {margin-top:-390px;}
+#mm3:checked ~ .panels div.contentPane:first-child {margin-top:-780px;}
+#mm4:checked ~ .panels div.contentPane:first-child {margin-top:-1170px;}
+#mm5:checked ~ .panels div.contentPane:first-child {margin-top:-1560px;}
+#mm6:checked ~ .panels div.contentPane:first-child {margin-top:-1950px;}
+#mm7:checked ~ .panels div.contentPane:first-child {margin-top:-2340px;}
+#mm8:checked ~ .panels div.contentPane:first-child {margin-top:-2730px;}
+
+.metroMenu .panels div.contentPane:nth-of-type(1) {background:#5ca0f1;}
+.metroMenu .panels div.contentPane:nth-of-type(2) {background:#b37;}
+.metroMenu .panels div.contentPane:nth-of-type(3) {background:#a05c92;}
+.metroMenu .panels div.contentPane:nth-of-type(4) {background:#ffa033;}
+.metroMenu .panels div.contentPane:nth-of-type(5) {background:#f14133;}
+.metroMenu .panels div.contentPane:nth-of-type(6) {background:#418569;}
+.metroMenu .panels div.contentPane:nth-of-type(7) {background:#4e4e4e;}
+.metroMenu .panels div.contentPane:nth-of-type(8) {background:#adad33;}
+
+#info .metroMenu div.panels div.contentPane h1 {padding:8px 0; margin:0; font:400 40px/45px 'PT Sans', arial, sans-serif; color:#fff;}
+#info .metroMenu div.panels div.contentPane h2 {padding:8px 0; margin:0; font:400 25px/30px 'PT Sans', arial, sans-serif; color:#fff;}
+#info .metroMenu div.panels div.contentPane p {padding:8px 0; margin:0; font:400 16px/20px 'PT Sans', arial, sans-serif; color:#fff;}
+
+.metroMenu .imgCenter {display:block; margin:50px auto;}
+
+.metroMenu #mmClose:checked ~ ul.options li label.close {display:none;}
+.metroMenu #mmClose:checked ~ div.panels {display:none;}
+
+
+/* form */
+.metroMenu .panels div.contentPane form {padding:50px 0 0 150px; margin:0; width:300px;}
+.metroMenu .panels div.contentPane form label {display:block; width:80px; float:left; clear:left; font:400 16px/40px 'PT Sans', arial, sans-serif; color:#fff;}
+.metroMenu .panels div.contentPane form input.ipt {display:block; width:150px; float:left; border:0; padding:10px;}
+.metroMenu .panels div.contentPane form input.submit {display:block; clear:left; margin-left:80px; border:0; background:#990; padding:10px 20px; font:400 16px/20px 'PT Sans', arial, sans-serif; color:#fff;}
+
+/* gallery */
+.metroMenu .radiogallery {position:relative; padding:0; margin:10px auto; width:224px; height:30px; padding:160px 10px 10px 10px; background:#f80;}
+.metroMenu .radiogallery input {position:absolute; left:-9999px;}
+.metroMenu .radiogallery label {display:block; width:28px; height:28px; margin:2px; float:left; background:#38e; text-align:center; cursor:pointer; font:400 11px/26px 'PT Sans', arial, sans-serif; position:relative; color:#fff;}
+
+.metroMenu .radiogallery div {position:absolute; left:10px; top:5px; width:224px; height:150px; text-align:center; opacity:0; filter: alpha(opacity=0);
+-webkit-transition:1s;
+-moz-transition:1s;
+-ms-transition:1s;
+-o-transition:1s;
+transition:1s;
+}
+.metroMenu .radiogallery input:checked + label {background-color:#164;}
+.metroMenu .radiogallery label:hover {background:#164;}
+
+.metroMenu .radiogallery input#pic1:checked ~ div.pic1,
+.metroMenu .radiogallery input#pic2:checked ~ div.pic2,
+.metroMenu .radiogallery input#pic3:checked ~ div.pic3,
+.metroMenu .radiogallery input#pic4:checked ~ div.pic4,
+.metroMenu .radiogallery input#pic5:checked ~ div.pic5,
+.metroMenu .radiogallery input#pic6:checked ~ div.pic6,
+.metroMenu .radiogallery input#pic7:checked ~ div.pic7 {opacity:1; filter: alpha(opacity=100);}
+
+/* calendar */
+.metroMenu .calendar {margin:10px auto 0 auto;}
+.metroMenu .calendar caption,
+.metroMenu .calendar tfoot tr td {font:400 16px/26px 'PT Sans', arial, sans-serif; color:#fff; text-align:center;}
+.metroMenu .calendar thead tr th {font:400 14px/24px 'PT Sans', arial, sans-serif; color:#fff; background:#38e; text-align:center; width:30px; margin:2px; text-align:center;}
+.metroMenu .calendar tbody tr td {font:400 14px/24px 'PT Sans', arial, sans-serif; color:#fff; background:#164; text-align:center; width:30px; margin:2px; text-align:center;}
+</style>
+
+<style>
+.ticker{height:20px;}
+.ticker, .spacer {border: 0px;}
+
+
+@media only screen and (max-width: 768px) {
+  .metroMenu div.panels {left: 100px;}
+  .center {width: 600px;}
+}
+@media only screen and (min-width: 768px) {
+  .metroMenu div.panels {left: 193px;}
+  .nav {width: 194px;}
+   .center {width: 768px;}
+}
+@media only screen and (min-width: 960px) {
+.metroMenu div.panels {left: 240px;}
+ .links {display:block;}
+ .slider { width: 576px;}
+
+ .center {width: 960px;}
+ .box {width: 960px;margin 0px;padding: 0;}
+ .ticker { width: 960px; }
+ .spacer { width: 960px; height:85px; background:#fff;}
+ .header1 {width: 240px;}
+ .header2 {width: 576px;}
+ .header3 {width: 144px;}
+ .nav { width: 240px; height:313px;}
+ .slider { width: 576px; height:313px;}
+ .links { width: 144px; height: 313px;}
+ .b1, .b2 { width: 480px; }
+ .b3 { width: 240px; }
+ .b4 { width: 720px; }
+ .b5 { width: 960px; }
+ .b6 { width: 240px; }
+ .b7 { width: 240px; }
+ .b8 { width: 240px; }
+ .b9 { width: 240px; }
+ .b10 { width: 960px; }
+}
+
+</style>
+
+</head>
+<body onload="document.body.style.opacity='1'" style="background: url(images/mountain-2.jpg) 0% 100% / 100% 100% no-repeat;">
+  <header> 
+  <div style="background-color:#f2f2f2; width:100%; height:20px;"><br></div>
+  </header>
+  <main>
+  <div class="center">
+
+    <div class="block-group">
+        <div class="ticker block box"><span id="welcome-header">Welkom in de Tirolershop, de plaats voor alle feestartikelen voor de Oktoberfesten!</span></div>
+        <div class="spacer block box">spacer</div>
+        <div class="header1 block box">Header1</div>
+        <div class="header2 block box">Header2</div>
+        <div class="header3 block box">Header3</div>
+        <div class="nav block box">
+        
+         <div class="container" onclick="">
+<div class="metroMenu">
+  <input class="metro" id="mm1" type="radio" name="metro">
+  <input class="metro" id="mm2" type="radio" name="metro">
+  <input class="metro" id="mm3" type="radio" name="metro">
+  <input class="metro" id="mm4" type="radio" name="metro">
+  <input class="metro" id="mm5" type="radio" name="metro">
+  <input class="metro" id="mm6" type="radio" name="metro">
+  <input class="metro" id="mm7" type="radio" name="metro">
+  <input class="metro" id="mm8" type="radio" name="metro">
+  <input class="metro" id="mmClose" type="radio" name="metro" checked="checked">
+  <ul class="options">
+    <li class="s21"><label for="mm1" class="metro"><span>File system</span></label><label for="mmClose" class="close"></label></li>
+    <li class="s21"><label for="mm2" class="metro"><span>Cloud control</span></label><label for="mmClose" class="close"></label></li>
+    <li class="s21"><label for="mm3" class="metro"><span>Games center</span></label><label for="mmClose" class="close"></label></li>
+    <li class="s21"><label for="mm4" class="metro"><span>Messaging</span></label><label for="mmClose" class="close"></label></li>
+    <li class="s21"><label for="mm5" class="metro"><span>Online shopping</span></label><label for="mmClose" class="close"></label></li>
+    <li class="s21"><label for="mm6" class="metro"><span>Calendar</span></label><label for="mmClose" class="close"></label></li>
+    <li class="s21"><label for="mm7" class="metro"><span>Mail contacts</span></label><label for="mmClose" class="close"></label></li>
+    <li class="s21"><label for="mm8" class="metro"><span>Settings</span></label><label for="mmClose" class="close"></label></li>
+  </ul>
+  <div class="panels">
+      <div class="contentPane">
+      <a href="vertical-menu.html">reload</a>
+        <h1>The MetroMenu from CSS play </h1>
+        <h2>Take control of your filing system</h2>
+        <h2>These panels can hold any information you want, from plain text, to photo galleries and forms.</h2>
+        <p>A filing cabinet (or sometimes file cabinet in American English) is a piece of office furniture usually used to store paper documents in file folders. In the most simple context, it is an enclosure for drawers in which items are stored. The two most common forms of filing cabinets are vertical files and lateral files. A vertical file cabinet has drawers that extend from the short side (typically 15 inches) of the cabinet. A lateral file cabinet has drawers that extend from the long side (various lengths) of the cabinet.</p>
+      </div>
+      <div class="contentPane">
+        <h1>The MetroMenu from CSS play</h1>
+        <h2>Don't forget to backup your files</h2>
+        <h2>You are not restricted to the height of these panels, if the content is too long then scroll bars will be shown.</h2>
+        <p>The scroll bars can be styled in Chrome, Safari and IE. IE10 on touch screen devices will also allow for scrolling of this panel.</p>
+        <p>Cloud storage is a model of networked enterprise storage where data is stored not only in the user's computer, but in virtualized pools of storage which are generally hosted by third parties, too. Hosting companies operate large data centers, and people who require their data to be hosted buy or lease storage capacity from them. The data center operators, in the background, virtualize the resources according to the requirements of the customer and expose them as storage pools, which the customers can themselves use to store files or data objects. Physically, the resource may span across multiple servers. The safety of the files depends upon the hosting websites.</p>
+      </div>
+      <div class="contentPane">
+        <h1>The MetroMenu from CSS play</h1>
+        <h2>Online games</h2>
+      </div>
+      <div class="contentPane">
+        <h1>The MetroMenu from CSS play</h1>
+        <h2>Messaging - login</h2>
+        <form name="login1" id="login1" action="#" method="get">
+          <label for="username1">Username</label><input name="username1" class="ipt" id="username1" type="text">
+          <label for="password1">Password</label><input name="password1" class="ipt" id="password1" type="text">
+          <input type="button" class="submit" value="Submit" id="submit1">
+        </form>
+      </div>
+      <div class="contentPane">
+        <h1>The MetroMenu from CSS play</h1>
+        <h2>Shop till you drop</h2>
+        <div class="radiogallery">
+          <input type="radio" name="pic" id="pic1" class="pics" checked="checked"><label for="pic1">01</label>
+          <input type="radio" name="pic" id="pic2" class="pics"><label for="pic2">02</label>
+          <input type="radio" name="pic" id="pic3" class="pics"><label for="pic3">03</label>
+          <input type="radio" name="pic" id="pic4" class="pics"><label for="pic4">04</label>
+          <input type="radio" name="pic" id="pic5" class="pics"><label for="pic5">05</label>
+          <input type="radio" name="pic" id="pic6" class="pics"><label for="pic6">06</label>
+          <input type="radio" name="pic" id="pic7" class="pics"><label for="pic7">07</label>
+          <div class="pic1"><img src="images/bag1.png" alt=""></div>
+          <div class="pic2"><img src="images/bag2.png" alt=""></div>
+          <div class="pic3"><img src="images/bag3.png" alt=""></div>
+          <div class="pic4"><img src="images/bag4.png" alt=""></div>
+          <div class="pic5"><img src="images/bag5.png" alt=""></div>
+          <div class="pic6"><img src="images/bag6.png" alt=""></div>
+          <div class="pic7"><img src="images/bag7.png" alt=""></div>
+        </div>
+      </div>
+      <div class="contentPane">
+        <h1>The MetroMenu from CSS play</h1>
+        <h2>Important dates in your calendar</h2>
+        <table class="calendar">
+          <caption>July 2013</caption>
+          <thead><tr><th scope="col">Mon</th><th scope="col">Tue</th><th scope="col">Wed</th><th scope="col">Thur</th><th scope="col" class="nd">Fri</th><th scope="col" class="nd">Sat</th><th scope="col" class="nd">Sun</th></tr></thead>
+          <tfoot><tr><td colspan="7">CSS play - MetroMenu</td></tr></tfoot>
+          <tbody>
+            <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
+            <tr><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td></tr>
+            <tr><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td></tr>
+            <tr><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td></tr>
+            <tr><td>29</td><td>30</td><td>31</td><td></td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="contentPane">
+        <h1>The MetroMenu from CSS play</h1>
+        <h2>Keep your contacts up to date</h2>
+        <form name="login2" id="login2" action="#" method="get">
+          <label for="username2">Username</label><input name="username2" class="ipt" id="username2" type="text"><br><br>
+          <label for="password2">Password</label><input name="password2" class="ipt" id="password2" type="text"><br><br>
+          <input type="button" class="submit" value="Login"  id="submit2">
+        </form>
+      </div>
+      <div class="contentPane">
+        <h1>The MetroMenu from CSS play</h1>
+        <h2>Change your online settings</h2>
+        <form name="login3" id="login3" action="#" method="get">
+          <label for="username3">Username</label><input name="username3" class="ipt" id="username3" type="text"><br><br>
+          <label for="password3">Password</label><input name="password3" class="ipt" id="password3" type="text"><br><br>
+          <input type="button" class="submit" value="Login" id="submit3">
+        </form>
+      </div>
+  </div>
+</div>
+</div>   
+        
+        </div>
+        <div class="slider block box">
+            Main<br>Main<br>Main<br>Main<br>Main<br>Main<br>Main<br>Main<br>Main<br>Main<br>Main<br>Main<br>Main<br></div>
+        <div class="links block box">Links</div>
+        <div class="b1 block box">b1</div>
+        <div class="b2 block box">b2</div>
+        <div class="b3 block box">b3</div>
+        <div class="b4 block box">b4</div>
+        <div class="b5 block box">b5</div>
+        <div class="b6 block box">b6</div>
+        <div class="b7 block box">b7</div>
+        <div class="b8 block box">b8</div>
+        <div class="b9 block box">b9</div>
+        <div class="b10 block box">b10</div>
+      
+    </div>
+
+  </div>
+  </main>
+  <footer> </footer>
+
+  <script async src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.2.0/respond.min.js"></script>
+  <script async  src="js/enquire.min.js"></script>
+  <script async  src="js/main.js"></script>
+</body>
+</html>

@@ -35,15 +35,14 @@ var Core9 = {
 	},
 
 	setStage : function() {
-		//Core9._setBodyBackground();
+		Core9._setBodyBackground();
 		Core9._resizeCenter();
 	},
 
 	_resizeCenter : function() {
-		Core9.center.style.setProperty('top', Core9.header.clientHeight - 85
-				+ 'px');
-		Core9.center.style.setProperty('min-height', (Core9.body.clientHeight
-				- Core9.header.clientHeight - Core9.footer.clientHeight + 135)
+/*		Core9.center.style.setProperty('top', Core9.header.clientHeight - 85
+				+ 'px');*/
+		Core9.center.style.setProperty('min-height', (Core9.body.clientHeight - Core9.footer.clientHeight + 85)
 				+ 'px');
 	},
 
