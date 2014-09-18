@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en"  class="load">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<title>Base theme</title>
+<style>
+*{margin:0;padding:0}body,html{height:100%;background:#fff}header{height:180px;background:#fff}main{min-height:100%;margin-top:-180px;margin-bottom:-105px;display:block}main:after{content:"";display:block}footer,main:after{height:105px}footer{background:#69b003}.center{width:960px;position:relative;margin: 0 auto;top:0px;}
+body{ 
+opacity:0;
+transition: opacity 0.5s;
+ -webkit-transition: opacity 0.5s ease-in;
+       -moz-transition: opacity 0.5s ease-in;
+        -ms-transition: opacity 0.5s ease-in;
+         -o-transition: opacity 0.5s ease-in;
+            transition: opacity 0.5s ease-in;
+}
+</style>
+<style>
+.center {
+  overflow: hidden;
+  width:100%;
+  background-color: #f2f2f2;
+  -webkit-box-shadow: 0px 9px 18px -7px #323232;
+  -moz-box-shadow: 0px 9px 18px -7px #323232;
+  box-shadow: 0px 30px 20px -14px #323232; /*experiment*/
+  margin-bottom: -100px;
+}
+</style>
+<style>
+.block-group,.block,.block-group:after,.block:after,.block-group:before,.block:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+.block-group{*zoom:1}
+.block-group:before,.block-group:after{display:table;content:"";line-height:0}
+.block-group:after{clear:both}
+.block-group{list-style-type:none;padding:0;margin:0}
+.block-group>.block-group{clear:none;float:left;margin:0 !important}
+.block{float:left;width:100%}
+.box {width: 100%;margin: 0px;padding: 0px;}
+</style>
+<style>
+/* Pocket grid 
+   Smartphone version
+   Nothing to do: blocks are stacked by default. */
+   /* custom stuff */
+.box {
+  background-color: #EEE;/*#E0E9FF; /* Old browsers */
+  font-size: .8em;
+  color: #777;
+  border: solid 1px #DDD;
+  text-align: center;
+  padding:0px;
+}
+</style>
+
+
+
+<style>
+.ticker{height:20px;}
+.ticker, .spacer {border: 0px;}
+
+@media only screen and (max-width: 600px) {
+ .ticker { height:40px; }
+}
+@media only screen and (max-width: 768px) {
+
+}
+@media only screen and (min-width: 768px) {
+   .center {width: 768px;}
+}
+@media only screen and (min-width: 960px) {
+ .links {display:block;}
+ .slider { width: 576px;}
+
+ .center {width: 960px;}
+ .box {width: 960px;margin 0px;padding: 0;}
+ .ticker { width: 960px; }
+ .spacer { width: 960px; height:85px; background:#fff;}
+ .header1 {width: 240px;}
+ .header2 {width: 576px;}
+ .header3 {width: 144px;}
+ .nav { width: 240px; height:113px;}
+ .slider { width: 576px; height:113px;}
+ .links { width: 144px; height: 113px;}
+ .b1 { width: 240px; }
+ .b2 { width: 300px; }
+ .b2-5 { width: 420px; }
+ .b3 { width: 240px; }
+ .b4 { width: 300px; }
+ .product-pricing {
+  width: 420px;
+ }
+ 
+ .b5 { width: 960px; }
+ .b6 { width: 240px; }
+ .b7 { width: 240px; }
+ .b8 { width: 240px; }
+ .b9 { width: 240px; }
+ .b10 { width: 960px; }
+}     
+</style>
+<style>
+/* seo friendly tables */
+.table{
+  display:table;  /* Defines a Table */
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:14px;
+  border-bottom:2px solid #dddddd;
+  color:#8d8d8d;
+  margin:10px 0;
+  width: 100%;
+}
+.table-head{
+   display: table-header-group; /* Defines a table header group */
+}
+.table-head .column{ /* Column inside the table-head */
+  background:#333333;
+  color:#7d7d7d;
+  border-right:1px solid #5d5d5d;
+  border-bottom:none;
+}
+.table-head .column:hover{ /* Column hover inside the table-head */
+  background:#222222;
+}
+.row{
+  display:table-row; /* Defines a table row */
+}
+.row .column:nth-child(1){ /* First column in a row */
+  border-left:1px solid #eeeeee;
+}
+.row:last-child .column{  /* column in a last row */
+  border-bottom:none;
+}
+.column{
+  display:table-cell; /* Defines a table cell */
+  padding:10px 20px;
+  border-bottom:1px solid #eeeeee;
+  border-right:1px solid #eeeeee;
+}
+.column:hover{
+  background:#f9f9f9;
+}
+/* Responsive table */
+@media all and (max-width: 640px){
+  .table,
+  .row,
+  .column,
+  .column:before{
+    display:block;  /* Converts a table, table row, table column and table column:before into a block element */
+  }
+  .table,
+  .row .column:last-child{
+    border-bottom:none;
+  }
+  .table-head{
+    position:absolute;  /* Hides table head but not using display none */
+    top:-1000em;
+    left:-1000em;
+  }
+  .row{
+    border:1px solid #eeeeee;
+    border-top:2px solid #dddddd;
+    border-bottom:2px solid #dddddd;
+    margin:20px 0;
+  }
+  .row .column:nth-child(1){ /* first column of the row */
+    border-left:none;
+  }
+  .row .column:last-child{ /* last column of the row */
+    border-right:none;
+  }
+  .row:last-child .column,
+  .column{ /* Column in the last row and column */
+    border-bottom:1px solid #eeeeee;
+  }
+  .column:before{ /* prints the value of data-label attribute before the column data */
+    font-weight:bold;
+    padding-right:20px;
+    font-size:12px;
+    content:" "attr(data-label)" "; /* call the attribute value of data-label and adds a string // */
+  }
+}
+
+
+
+</style>
+</head>
+<body onload="document.body.style.opacity='1'" style="background: url(images/mountain-2.jpg) 0% 100% / 100% 100% no-repeat;">
+  <header> 
+  <div style="background-color:#f2f2f2; width:100%; height:20px;"><br></div>
+  </header>
+  <main>
+  <div class="center">
+
+    <div class="block-group">
+        <div class="ticker block box"><span id="welcome-header">Welkom in de Tirolershop, de plaats voor alle feestartikelen voor de Oktoberfesten!</span></div>
+        <div class="spacer block box">spacer<br><a href="mobile-cart.html">reload</a></div>
+        <div class="header1 block box">Header1</div>
+        <div class="header2 block box">Header2</div>
+        <div class="header3 block box">Header3</div>
+        <div class="nav block box">nav</div>
+        <div class="slider block box">
+            Main<br>Main<br>Main</div>
+        <div class="links block box">Links</div>
+        <div class="b1 block box">b1</div>
+        <div class="b2 block box">b2</div>
+        <div class="b2-5 block box">
+          <h1>Pruik Heini blond</h1>
+        </div>
+        <div class="b3 block box">b3</div>
+        <div class="b4 block box">
+          <img src="images/pruik.jpg"><br>
+          <img src="images/pruik-small.jpg">
+          <img src="images/pruik-small.jpg">
+          <img src="images/pruik-small.jpg">
+        </div>    
+        
+         <div class="product-pricing block box">
+         
+        <p>when the browser is resized to 640 px the table will respond and change its layout product</p>
+    <div class="table">
+        <div class="table-head">
+            <div class="column" data-label="Afbeelding">Afbeelding</div>
+            <div class="column" data-label="Afbeelding">Artikel</div>
+            <div class="column" data-label="Hoeveelheid">Hoeveelheid</div>
+            <div class="column" data-label="Prijs">Prijs</div>
+        </div>
+        <div class="row">
+            <div class="column" data-label="Afbeelding">2311</div>
+            <div class="column" data-label="Artikel">Lorem</div>
+            <div class="column" data-label="Hoeveelheid">Ipsum dolor</div>
+            <div class="column" data-label="Prijs">22</div>
+       </div>
+        <div class="row">
+            <div class="column" data-label="Afbeelding">2311</div>
+            <div class="column" data-label="Artikel">Lorem</div>
+            <div class="column" data-label="Hoeveelheid">Ipsum dolor</div>
+            <div class="column" data-label="Prijs">22</div>
+       </div>
+    </div>
+        
+        </div>
+        <div class="b5 block box">b5</div>
+        <div class="b6 block box">b6</div>
+        <div class="b7 block box">b7</div>
+        <div class="b8 block box">b8</div>
+        <div class="b9 block box">b9</div>
+        <div class="b10 block box">b10</div>
+      
+    </div>
+
+  </div>
+  </main>
+  <footer> </footer>
+
+  <script async src="js/respond.min.js"></script>
+  <script async  src="js/enquire.min.js"></script>
+  <script async  src="js/main.js"></script>
+</body>
+</html>
