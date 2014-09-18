@@ -181,7 +181,9 @@ transition: opacity 0.5s;
   }
 }
 
-
+input[type="text"] {
+  width:30px;
+}
 
 </style>
 </head>
@@ -220,21 +222,25 @@ transition: opacity 0.5s;
         <p>when the browser is resized to 640 px the table will respond and change its layout product</p>
     <div class="table">
         <div class="table-head">
-            <div class="column" data-label="Afbeelding">Afbeelding</div>
-            <div class="column" data-label="Afbeelding">Artikel</div>
-            <div class="column" data-label="Hoeveelheid">Hoeveelheid</div>
+            <div class="column" data-label="Uitvoering">Uitvoering</div>
+            <div class="column" data-label="Prijs">Prijs</div>
+            <div class="column" data-label="Aantal">Aantal</div>
             <div class="column" data-label="Prijs">Prijs</div>
         </div>
         <div class="row">
-            <div class="column" data-label="Afbeelding">2311</div>
-            <div class="column" data-label="Artikel">Lorem</div>
-            <div class="column" data-label="Hoeveelheid">Ipsum dolor</div>
+            <div class="column" data-label="Uitvoering">2311</div>
+            <div class="column" data-label="Prijs">Lorem</div>
+            <div class="column" data-label="Aantal">
+              <div><span class=""><button class="" type="button">-</button></span><span class=""></span><input type="text" name="quantity" class="" value="1"><span class=""></span><span class=""><button class="" type="button">+</button></span></div>
+            </div>
             <div class="column" data-label="Prijs">22</div>
        </div>
         <div class="row">
-            <div class="column" data-label="Afbeelding">2311</div>
-            <div class="column" data-label="Artikel">Lorem</div>
-            <div class="column" data-label="Hoeveelheid">Ipsum dolor</div>
+            <div class="column" data-label="Uitvoering">2311</div>
+            <div class="column" data-label="Prijs">Lorem</div>
+            <div class="column" data-label="Aantal">
+              <div><span class=""><button class="" type="button">-</button></span><span class=""></span><input type="text" name="quantity" class="" value="1"><span class=""></span><span class=""><button class="" type="button">+</button></span></div>
+            </div>
             <div class="column" data-label="Prijs">22</div>
        </div>
     </div>
